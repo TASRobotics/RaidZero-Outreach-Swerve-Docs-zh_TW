@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-TW" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Swerve Class &mdash; 4253 Swerve Documentation 1.0.0 說明文件</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -82,7 +81,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="swerve-class">
+  <div class="section" id="swerve-class">
 <h1>Swerve Class<a class="headerlink" href="#swerve-class" title="本標題的永久連結"></a></h1>
 <p>The swerve class combines 4 swerve modules to control the swerve as a whole.</p>
 <div class="admonition note">
@@ -90,7 +89,7 @@
 <p>For API specific issues, please see the <a class="reference external" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">WPILib API</a>
 , <a class="reference external" href="https://api.ctr-electronics.com/phoenix/release/java/">CTRE API</a>, and the <a class="reference external" href="https://codedocs.revrobotics.com/java/com/revrobotics/package-summary.html">REV Robotics API</a>.</p>
 </div>
-<section id="constructor">
+<div class="section" id="constructor">
 <h2>Constructor<a class="headerlink" href="#constructor" title="本標題的永久連結"></a></h2>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Initialize IMU</span>
 <span class="kd">private</span> <span class="kd">final</span> <span class="n">WPI_Pigeon2</span> <span class="n">mImu</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WPI_Pigeon2</span><span class="p">(</span><span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kImuID</span><span class="p">);</span>
@@ -137,10 +136,10 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-</section>
-<section id="methods">
+</div>
+<div class="section" id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="本標題的永久連結"></a></h2>
-<section id="drive">
+<div class="section" id="drive">
 <h3>drive<a class="headerlink" href="#drive" title="本標題的永久連結"></a></h3>
 <p>Updates Chassis speeds based on controller XYZ values.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">drive</span><span class="p">(</span><span class="kt">double</span> <span class="n">xSpeed</span><span class="p">,</span> <span class="kt">double</span> <span class="n">ySpeed</span><span class="p">,</span> <span class="kt">double</span> <span class="n">zSpeed</span><span class="p">,</span> <span class="kt">boolean</span> <span class="n">fieldOriented</span><span class="p">)</span> <span class="p">{</span>
@@ -159,7 +158,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<section id="parameters">
+<div class="section" id="parameters">
 <h4><strong>Parameters:</strong><a class="headerlink" href="#parameters" title="本標題的永久連結"></a></h4>
 <blockquote>
 <div><ol class="arabic simple">
@@ -169,9 +168,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">fieldOriented</span></code> - Determines if bot’s movement is oriented to the field</p></li>
 </ol>
 </div></blockquote>
-</section>
-</section>
-<section id="getmodulestates">
+</div>
+</div>
+<div class="section" id="getmodulestates">
 <h3>getModuleStates<a class="headerlink" href="#getmodulestates" title="本標題的永久連結"></a></h3>
 <p>Outputs the current state of the 4 drive swerve modules.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">SwerveModuleState</span><span class="o">[]</span> <span class="nf">getModuleStates</span><span class="p">()</span> <span class="p">{</span>
@@ -184,14 +183,14 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<section id="return">
+<div class="section" id="return">
 <h4><strong>Return:</strong><a class="headerlink" href="#return" title="本標題的永久連結"></a></h4>
 <blockquote>
 <div><p>Returns SwerveModuleState array with rotor throttle &amp; position</p>
 </div></blockquote>
-</section>
-</section>
-<section id="setmodulestates">
+</div>
+</div>
+<div class="section" id="setmodulestates">
 <h3>setModuleStates<a class="headerlink" href="#setmodulestates" title="本標題的永久連結"></a></h3>
 <p>Sets the state of the 4 drive swerve modules.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Swerve module order: [leftFront, leftRear, rightFront, rightRear]</span>
@@ -204,16 +203,16 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<section id="id1">
+<div class="section" id="id1">
 <h4><strong>Parameters:</strong><a class="headerlink" href="#id1" title="本標題的永久連結"></a></h4>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">desiredStates</span></code> - Array of desired <a class="reference external" href="https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/kinematics/SwerveModuleState.html">SwerveModuleState</a>.</p></li>
 </ol>
 </div></blockquote>
-</section>
-</section>
-<section id="getpose">
+</div>
+</div>
+<div class="section" id="getpose">
 <h3>getPose<a class="headerlink" href="#getpose" title="本標題的永久連結"></a></h3>
 <p>Gets the current position of the robot.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">Pose2d</span> <span class="nf">getPose</span><span class="p">()</span> <span class="p">{</span>
@@ -221,14 +220,14 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<section id="id2">
+<div class="section" id="id2">
 <h4><strong>Return:</strong><a class="headerlink" href="#id2" title="本標題的永久連結"></a></h4>
 <blockquote>
 <div><p>New <a class="reference external" href="https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/geometry/Pose2d.html">Pose2d</a> representing robot position on the field in meters</p>
 </div></blockquote>
-</section>
-</section>
-<section id="setpose">
+</div>
+</div>
+<div class="section" id="setpose">
 <h3>setPose<a class="headerlink" href="#setpose" title="本標題的永久連結"></a></h3>
 <p>Sets odometry position to a given x, y, position, and angle</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPose</span><span class="p">(</span><span class="n">Pose2d</span> <span class="n">pose</span><span class="p">)</span> <span class="p">{</span>
@@ -236,7 +235,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<section id="id3">
+<div class="section" id="id3">
 <h4><strong>Parameters:</strong><a class="headerlink" href="#id3" title="本標題的永久連結"></a></h4>
 <blockquote>
 <div><ol class="arabic simple">
@@ -244,10 +243,10 @@
 object with the robot position and angle</p></li>
 </ol>
 </div></blockquote>
-</section>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
+</div>
 
 
            </div>
