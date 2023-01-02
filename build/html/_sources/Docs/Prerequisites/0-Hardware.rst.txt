@@ -1,8 +1,8 @@
-####
-你好
-####
+########
+Hardware
+########
 
-Having a good swerve starts with having good hardware. Here is a short summary of 
+Having a good swerve starts with having good hardware. Here is a summary of 
 potential swerve hardware you might use. 
 
 Modules: 
@@ -11,21 +11,21 @@ Modules:
 Swerve Drive Specialties:
 =========================
 
-* `MK4 Module <https://www.swervedrivespecialties.com/products/mk4-swerve-module>`_
+- `MK4 Module <https://www.swervedrivespecialties.com/products/mk4-swerve-module>`_
 
-  * Cost (not including motors): $300-310 USD
+  - Cost (not including motors): $300-310 USD
 
-  * Weight (with motors): 2.2 kg (Neo), 2.4 kg (Falcon)
+  - Weight (with motors): 2.2 kg (Neo), 2.4 kg (Falcon)
 
-  * Notable Features: Very robust and used widely among FRC teams
+  - Notable Features: Very robust and used widely among FRC teams
 
-* `MK4i Module <https://www.swervedrivespecialties.com/collections/kits/products/mk4i-swerve-module>`_
-
-  * Cost (not including motors): $365 USD
-
-  * Weight (including motors): 2.7 kg (Neo), 2.9 kg (Falcon)
-
-  * Notable Features: Compact, robust, and popular among FRC teams
+- `MK4i Module <https://www.swervedrivespecialties.com/collections/kits/products/mk4i-swerve-module>`_
+  
+  - Cost (not including motors): $365 USD
+  
+  - Weight (including motors): 2.7 kg (Neo), 2.9 kg (Falcon)
+  
+  - Notable Features: Compact, robust, and popular among FRC teams
 
 .. list-table:: 
 
@@ -46,13 +46,13 @@ Swerve Drive Specialties:
 West Coast Products: 
 ====================
 
-* `Swerve X <https://wcproducts.com/products/swerve-x>`_
+- `Swerve X <https://wcproducts.com/products/swerve-x>`_
 
-  * Cost (not including motors): $305-325 USD
+  - Cost (not including motors): $305-325 USD
 
-  * Weight (not including motors): 1.2-1.6 kg (depends on the model)
+  - Weight (not including motors): 1.2-1.6 kg (depends on the model)
 
-  * Notable Features: Very configurable, many different options to choose from
+  - Notable Features: Very configurable, many different options to choose from
 
 .. figure:: ../Photos/Hardware/SwerveX.webp
     :alt: Image of possible Swerve X configuration
@@ -64,13 +64,13 @@ West Coast Products:
 REV Robotics: 
 =============
 
-* `MAXSwerve <https://www.revrobotics.com/pre-order-rev-21-3005/>`_
+- `MAXSwerve <https://www.revrobotics.com/pre-order-rev-21-3005/>`_
 
-  * Cost (not including motors): $300 USD
+  - Cost (not including motors): $300 USD
 
-  * Weight (including motors): 1.7 kg (Neo), 1.8 kg (Falcon)
+  - Weight (including motors): 1.7 kg (Neo), 1.8 kg (Falcon)
 
-  * Notable Features: Incredibly small and lightweight
+  - Notable Features: Incredibly small and lightweight
 
 .. figure:: ../Photos/Hardware/MAXSwerve.webp
     :alt: Image of MAXSwerve
@@ -82,13 +82,13 @@ REV Robotics:
 Homemade Swerve:
 ================
 
-* Your Imagination
+- Your Imagination
 
-  * Cost (not including motors): time and money
+  - Cost: time and money
 
-  * Weight (not including motors): :math:`[0, \infty)`
+  - Weight: n/a
 
-  * Notable Features: You can customize it any way you want
+  - Notable Features: You can customize it any way you want
 
 Sensor Customization
 ********************
@@ -101,7 +101,7 @@ for measuring the angle of the rotor. It is a great sensor but it can be a bit e
 Thus, teams with a tighter 
 budget can consider using the `Thrifty Absolute Magnetic Encoder 
 <https://www.thethriftybot.com/bearings/Thrifty-Absolute-Magnetic-Encoder-p421607500>`_. 
-This encoder uses the same mount as normal CANCoders, but come at a much cheaper price. 
+This encoder uses the same mount as normal CANCoders, but comes at a much cheaper price. 
 
 .. list-table:: 
 
@@ -123,7 +123,7 @@ IMU
 ===
 
 Additionally, teams must have an IMU on the robot to measure the angle of the robot. Popular 
-IMU choices include `Pigeon <https://store.ctr-electronics.com/pigeon-2/>`_ and 
+IMU choices include the `Pigeon <https://store.ctr-electronics.com/pigeon-2/>`_ and 
 `navX <https://www.andymark.com/products/navx2-mxp-robotics-navigation-sensor>`_ IMUs. 
 
 .. list-table:: 
@@ -141,10 +141,3 @@ IMU choices include `Pigeon <https://store.ctr-electronics.com/pigeon-2/>`_ and
             :scale: 20%
 
             Pigeon2 IMU
-
-Conclusion
-**********
-
-As shown above, there are numerous ways you can create your custom swerve, 
-all of which have their advantages and disadvantages. In the end, it all comes 
-down to how much time and money you are willing to spend on your swerve.

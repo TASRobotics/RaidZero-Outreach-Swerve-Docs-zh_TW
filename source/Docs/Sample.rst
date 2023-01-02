@@ -20,6 +20,7 @@ If you have a big chunk of code, you can do something like this:
 
 .. code-block:: cpp
 
+    // This is a comment
     std::shared_ptr<AsyncHolonomicChassisController> controller = 
         AsyncHolonomicChassisControllerBuilder(std::shared_ptr<okapi::OdomChassisController> ichassis)
 
@@ -40,7 +41,7 @@ You can also have different tabs
         .. code-block:: python
 
             print("Hello World")
-~
+
 Images look like this
 
 .. image:: Photos/LogoBW.png
@@ -53,9 +54,6 @@ You can also include captions like this
     :alt: Logo
 
     A caption
-    
-    a caption 2
-
 
 Write math equations like this: :math:`e^{i\pi} + 1 = 0`
 
@@ -71,5 +69,6 @@ Make tables like this
 | row 3, col 1    | row 3, col 2    | row 3, col 3    |
 +-----------------+-----------------+-----------------+
 
-Check out other things you can do with sphinx 
-`here <https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html>`_
+.. note:: 
+    Check out other things you can do with sphinx 
+    `here <https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html>`_

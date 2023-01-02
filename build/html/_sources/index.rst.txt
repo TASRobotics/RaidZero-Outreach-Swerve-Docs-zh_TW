@@ -26,12 +26,13 @@ you will need to know to get a swerve drive up and running.
    Docs/Software/4-SwerveClass
    Docs/Software/5-Teleop
    Docs/Software/6-Auton
-
+   
 .. toctree::
    :titlesonly:
-   :caption: Extra
+   :caption: Further Topics
    
-   Docs/Software/7-FurtherTopics
+   Docs/FurtherTopics/7-Feedforward
+   Docs/Sample.rst
 
 .. image:: Docs/Photos/LogoBW.png
     :scale: 10%
