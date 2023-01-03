@@ -1,31 +1,30 @@
-########
-Hardware
-########
+####
+硬件
+####
 
-Having a good swerve starts with having good hardware. Here is a summary of 
-potential swerve hardware you might use. 
+一個好的 Swerve 需要好的硬件。以下是一些你可能會用的 Swerve 硬件。 
 
-Modules: 
-********
+機型：
+******
 
 Swerve Drive Specialties:
 =========================
 
-- `MK4 Module <https://www.swervedrivespecialties.com/products/mk4-swerve-module>`_
+- `MK4 型號 <https://www.swervedrivespecialties.com/products/mk4-swerve-module>`_
 
-  - Cost (not including motors): $300-310 USD
+  - 價錢（不包括馬達）：$300-310 USD
 
-  - Weight (with motors): 2.2 kg (Neo), 2.4 kg (Falcon)
+  - 重量（包括馬達）：2.2 kg (Neo), 2.4 kg (Falcon)
 
-  - Notable Features: Very robust and used widely among FRC teams
+  - 特徵：非常壯實，很多 FRC 隊使用
 
-- `MK4i Module <https://www.swervedrivespecialties.com/collections/kits/products/mk4i-swerve-module>`_
+- `MK4i 型號 <https://www.swervedrivespecialties.com/collections/kits/products/mk4i-swerve-module>`_
   
-  - Cost (not including motors): $365 USD
+  - 價錢（不包括馬達）：$365 USD
   
-  - Weight (including motors): 2.7 kg (Neo), 2.9 kg (Falcon)
+  - 重量（包括馬達）：2.7 kg (Neo), 2.9 kg (Falcon)
   
-  - Notable Features: Compact, robust, and popular among FRC teams
+  - 特徵：紮實，壯實，很多FRC隊使用
 
 .. list-table:: 
 
@@ -34,74 +33,73 @@ Swerve Drive Specialties:
             :target: https://www.swervedrivespecialties.com/collections/kits/products/mk4-swerve-module
             :scale: 30%
 
-            MK4 Swerve Module
+            MK4 型號
 
       - .. figure:: ../Photos/Hardware/MK4i.webp
             :alt: MK4i Swerve Module Image
             :target: https://www.swervedrivespecialties.com/collections/kits/products/mk4i-swerve-module
             :scale: 30%
 
-            MK4i Swerve Module
+            MK4i 型號
 
 West Coast Products: 
 ====================
 
 - `Swerve X <https://wcproducts.com/products/swerve-x>`_
 
-  - Cost (not including motors): $305-325 USD
+  - 價錢（不包括馬達）：$305-325 USD
 
-  - Weight (not including motors): 1.2-1.6 kg (depends on the model)
+  - 重量（包括馬達）：1.2-1.6 kg (depends on the model)
 
-  - Notable Features: Very configurable, many different options to choose from
+  - 特徵：非常容易配置，很多選則
 
 .. figure:: ../Photos/Hardware/SwerveX.webp
     :alt: Image of possible Swerve X configuration
     :target: https://wcproducts.com/products/swerve-x
     :scale: 45%
 
-    Possible Swerve X Configuration
+    可能的 Swerve X 配置
 
 REV Robotics: 
 =============
 
 - `MAXSwerve <https://www.revrobotics.com/pre-order-rev-21-3005/>`_
 
-  - Cost (not including motors): $300 USD
+  - 價錢（不包括馬達）：$300 USD
 
-  - Weight (including motors): 1.7 kg (Neo), 1.8 kg (Falcon)
+  - 重量（包括馬達）：1.7 kg (Neo), 1.8 kg (Falcon)
 
-  - Notable Features: Incredibly small and lightweight
+  - 特徵：非常小，輕
 
 .. figure:: ../Photos/Hardware/MAXSwerve.webp
     :alt: Image of MAXSwerve
     :target: https://www.revrobotics.com/pre-order-rev-21-3005/
     :scale: 25%
 
-    MAXSwerve Module
+    MAXSwerve 型號
 
-Homemade Swerve:
-================
+自造的 Swerve:
+==============
 
-- Your Imagination
+- 你的想像力
 
-  - Cost: time and money
+  - 價錢：時間與錢
 
-  - Weight: n/a
+  - 重量：n/a
 
-  - Notable Features: You can customize it any way you want
+  - 特徵：你可以自由的發揮
 
-Sensor Customization
-********************
+傳感器的客製化：
+****************
 
-Rotor Encoder
-=============
+Rotor 編碼器
+============
 
-FRC teams often use the `CTRE CANCoder <https://store.ctr-electronics.com/cancoder/>`_
-for measuring the angle of the rotor. It is a great sensor but it can be a bit expensive. 
-Thus, teams with a tighter 
-budget can consider using the `Thrifty Absolute Magnetic Encoder 
-<https://www.thethriftybot.com/bearings/Thrifty-Absolute-Magnetic-Encoder-p421607500>`_. 
-This encoder uses the same mount as normal CANCoders, but comes at a much cheaper price. 
+FRC 隊常用 `CTRE CANCoder <https://store.ctr-electronics.com/cancoder/>`_
+來量 rotor 的角度。它是一個很好的傳感器，但價錢有點高。如果想找比較便宜的選項，
+可以考慮用 `Thrifty Absolute Magnetic Encoder 
+<https://www.thethriftybot.com/bearings/Thrifty-Absolute-Magnetic-Encoder-p421607500>`_。
+這個 編碼器和其他的CANCoders使用一樣的安裝配件，但價錢低很多。
 
 .. list-table:: 
 
@@ -122,8 +120,8 @@ This encoder uses the same mount as normal CANCoders, but comes at a much cheape
 IMU
 ===
 
-Additionally, teams must have an IMU on the robot to measure the angle of the robot. Popular 
-IMU choices include the `Pigeon <https://store.ctr-electronics.com/pigeon-2/>`_ and 
+此外，所有的機器人上都需要有一個 IMU 來兩機器人的角度。受歡迎的 IMU 選擇包括 `Pigeon 
+<https://store.ctr-electronics.com/pigeon-2/>`_ 和 
 `navX <https://www.andymark.com/products/navx2-mxp-robotics-navigation-sensor>`_ IMUs. 
 
 .. list-table:: 

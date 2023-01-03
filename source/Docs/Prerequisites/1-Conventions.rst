@@ -1,43 +1,43 @@
-###########
-Conventions
-###########
+####
+格式
+####
 
-Here are the conventions used in these docs.
+以下是一些常用的各式。
 
-Variable Naming
+Variable 命名
+*************
+
+- 實例變數： ``m[VARIABLE_NAME]`` (e.g. ``mMotorController``)
+
+- 常數： ``k[VARIABLE_NAME]`` (e.g. ``kMotorControllerID``)
+
+Swerve 零件命名
 ***************
-
-- Instance Variables: ``m[VARIABLE_NAME]`` (e.g. ``mMotorController``)
-
-- Constants: ``k[VARIABLE_NAME]`` (e.g. ``kMotorControllerID``)
-
-Swerve Part Naming
-******************
 
 .. figure:: ../Photos/Hardware/AnnotatedMK4.png
     :alt: Swerve Parts
     :target: https://www.swervedrivespecialties.com/collections/kits/products/mk4-swerve-module
     :scale: 50%
 
-    Swerve Parts; `source <https://www.swervedrivespecialties.com/collections/kits/products/mk4-swerve-module>`_
+    Swerve 零件； `來源 <https://www.swervedrivespecialties.com/collections/kits/products/mk4-swerve-module>`_
 
-1. **Throttle**: Controls the rotation of the wheel
-2. **Rotor**: Controls the angle of the wheel (**Throttle Encoder** *measures* the angle of the rotor)
+1. **Throttle**: 控制輪子的旋轉
+2. **Rotor**: 控制輪子的角度 (Throttle Encoder 量 rotor 的角度）
 
-SwerveModule Order
-******************
+SwerveModule 順序
+*****************
 
-Order of the Swerve Modules used in this guide:
+這個 documentation 裡 Swerve Modules 的順序：
 
-1. Left Front
-2. Right Front
-3. Left Rear
-4. Right Rear
+1. 左前方
+2. 右前方
+3. 左後方
+4. 右後方
 
 .. figure:: ../Photos/AnnotatedSwerveDrive.png
     :alt: Swerve Module Order
     :target: https://www.reddit.com/r/FRC/comments/mrhzks/the_mk2_swerve_drive_from_swerve_drive/
     :scale: 50%
     
-    Swerve Module Order; source
+    Swerve Module 順序；來源
     

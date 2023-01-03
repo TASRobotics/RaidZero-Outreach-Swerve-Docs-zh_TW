@@ -1,28 +1,27 @@
-######################
-Software Prerequisites
-######################
+##############
+軟體的先決條件
+##############
 
-Before you proceed, there are a few software concepts you should be familiar with.  
+以下是一些你需要熟悉的軟體概念。
 
-WPILib Command Based Structure:
-*******************************
+WPILib Command Based 的結構：
+*****************************
 
-- WPILib Command Based documentation `here <https://docs.wpilib.org/en/latest/docs/software/commandbased/index.html>`_.
+- WPILib Command Based `紀錄 <https://docs.wpilib.org/en/latest/docs/software/commandbased/index.html>`_.
 
 .. note::
-    Using command based is not required for writing good swerve software. However, 
-    this guide will use command based. 
+    好的軟體不一定需要 command based ，但這個紀錄會用 command based。
 
 PID:
 ****
 
-- WPILib article `here <https://docs.wpilib.org/en/latest/docs/software/advanced-controls/controllers/pid-controller.html>`_.
+- WPILib `文章 <https://docs.wpilib.org/en/latest/docs/software/advanced-controls/controllers/pid-controller.html>`_.
 
-- George Gillard article `here <https://www.georgegillard.com/component/osdownloads/routedownload/robotics/introduction-to-pid-controllers-2nd-edition>`_.
+- George Gillard `文章 <https://www.georgegillard.com/component/osdownloads/routedownload/robotics/introduction-to-pid-controllers-2nd-edition>`_.
 
 .. figure:: ../Photos/PID.png
     :alt: Diagram of PID
     :target: https://maldus512.medium.com/pid-control-explained-45b671f10bc7
     :scale: 40%
 
-    Diagram of PID; `source <https://maldus512.medium.com/pid-control-explained-45b671f10bc7>`_
+    的圖表； `來源 <https://maldus512.medium.com/pid-control-explained-45b671f10bc7>`_

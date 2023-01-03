@@ -3,15 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to 4253's Swerve Documentation!
+歡迎來到 4253 的 Swerve Documentation！
 =======================================
 
-Welcome to FRC Team 4253's Swerve Documentation! This documentation contains everything
-you will need to know to get a swerve drive up and running.
+歡迎來到 4253 FRC 隊的 Swerve Documentation！這個紀錄包含了所有你需要了解的資訊。
 
 .. toctree::
    :titlesonly:
-   :caption: Swerve: Pre-Software
+   :caption: Swerve：前置作業
 
    Docs/Prerequisites/0-Hardware
    Docs/Prerequisites/0.5-SoftwarePrerequisites
@@ -20,7 +19,7 @@ you will need to know to get a swerve drive up and running.
 
 .. toctree::
    :titlesonly:
-   :caption: Swerve: Software
+   :caption: Swerve：軟體
 
    Docs/Software/3-SwerveModuleClass
    Docs/Software/4-SwerveClass
@@ -29,7 +28,7 @@ you will need to know to get a swerve drive up and running.
    
 .. toctree::
    :titlesonly:
-   :caption: Further Topics
+   :caption: 其他話題
    
    Docs/FurtherTopics/7-Feedforward
    Docs/Sample.rst
