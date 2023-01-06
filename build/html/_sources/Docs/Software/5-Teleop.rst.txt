@@ -1,21 +1,22 @@
-######
-TeleOp
-######
+########
+手動操控
+########
 
-This section will be explaining manual robot control (Teleop), which lasts 2 minutes and 15 seconds of the game.
-This documentation will be referring to the manual drive class, and specific parts of the RobotContainer class.
-More information about RobotContainer can be found `here <https://docs.wpilib.org/en/stable/docs/software/commandbased/structuring-command-based-project.html#robotcontainer>`_.
+本頁將解釋持續 2 分 15 秒的手動機器人控制（Teleop）。本文檔將參考與提到 Manual 
+Drive Class 和 RobotContainer。可以在 `here <https://docs.wpilib.org/en/
+stable/docs/software/commandbased/structuring-command-based-project.html#robotcontainer>`_ 
+找到更多有關於 RobotContainer 的信息。
 
-Driving
-=======
+操縱
+====
 
-There are 2 main types of driving: field-oriented and robot-oriented.
+機器有兩種主要的移動類型：Field Oriented Driving 和 Robot Oriented Driving。
 
-Field-oriented driving involves a drive system that provides strafing motion in all directions and rotations with respect to the field. 
-For example, if the robot is facing east and the joystick is pushed forward, the robot would move north.
+Field Oriented Driving的移動放式可以使機器在面向場地任何一邊時平移向各個方向。
+例如，當機器人面朝東方時將操縱桿向前推機器人會向北移動。
 
-Compared to robot-oriented driving, the joystick's movement would be relative to the robot instead of the field.
-For example, if the robot was facing east and the joystick is pushed forward, the robot would move east.
+與Field Oriented Driving相比，Robot Oriented Driving 的操縱桿的移動將與機器
+相關，而不是與場地相關。例如，當機器人面朝東方時將操縱桿向前堆，機器人就會向東移動。
 
 .. figure:: ../Photos/Software/Field-robot-oriented.png
     :scale: 50%
@@ -29,30 +30,29 @@ For example, if the robot was facing east and the joystick is pushed forward, th
    * - 
      - Field-oriented
      - Robot-oriented
-   * - Requires IMU
-     - Yes (IMU drift*)
-     - No
-   * - Joystick movement
-     - Relative to field
-     - Relative to robot
+   * - 需要 IMU
+     - 要（會有誤差積累*）
+     - 不
+   * - 操縱桿的移動
+     - 相對於場地
+     - 相對於機器
 
 
-\* IMU drift may cause slight inaccuracy in field-oriented driving.
+\* IMU 誤差積累又可能會造成 Field Orientation Driving 有些微的不準確
 
 
-Here's a demonstration of field-oriented control:
+以下是 field-oriented control 的示範：
 
 .. raw:: html
 
     <iframe width="560" height="315" src="https://www.youtube.com/embed/50ZRrYFWPIc?start=21" title="Field oriented control" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-Drive Command
-=============
+驅動程式
+========
 
-Since we will be using `command based programming <https://docs.wpilib.org/en
-/latest/docs/software/commandbased/index.html>`_, a drive command has to be created to 
-manually operate the robot.
+因為我們使用 `command based programming <https://docs.wpilib.org/en
+/latest/docs/software/commandbased/index.html>`_，所以需要驅動程式來控制機器。
 
 Constructor
 ***********
@@ -67,7 +67,7 @@ Constructor
         mSwerve = drive;
         mController = controller;
 
-        // Adds the Swerve subsystem as a requirement to the command
+        // 加入 swerve 為這條命令的必要條件
         addRequirements(mSwerve);
     }
 
@@ -77,14 +77,12 @@ Constructor
 1. ``drive`` - a swerve object for the drive
 2. ``controller`` - a XboxController method for the controller
 
-A drive command has to be created to manually operate the robot. Calling the 
-constructor will create the drive command, where it will then be used in RobotContainer.
+必須創建驅動命令才能手動操控機器人。調用構造函數將創建驅動命令，然後在 RobotContainer 中使用它。
 
 execute
 *******
 
-The execute method is called repeatedly when the command is scheduled. This is 
-where the code for teleop will be written.
+當 drivecommand 被叫到時，execute method 會一直執行，所以操控程式要寫在這裡。
 
 .. code-block:: java
     :linenos:
@@ -96,26 +94,25 @@ where the code for teleop will be written.
         mSwerve.drive(mController.getLeftY(), mController.getLeftX(), mController.getRightX(), true);
     }
 
-Calling the Drive Command
-=========================
+執行驅動程式
+===========
 
-Finally, the drive command has to be called in RobotContainer. 
+Drive command 需要再 RobotContainer 裡被叫到。
 
 .. code-block:: java
     :linenos:
 
-    // Create new instance of ManualDrive, passing Swerve and Controller as parameters
+    // 創造一個新的 ManualDrive instance, 給他 Swerve 跟 Controller 當 parameters
     private final ManualDrive mManualDriveCommand = new ManualDrive(mSwerve, mController);
 
     public RobotContainer() {
-        // Configure the button bindings
+        // 配置按鈕綁定
         configureButtonBindings();
 
-        // set ManualDrive to be executed in teleop
+        // 設置 ManuelDrive 在手動操控中執行
         mSwerve.setDefaultCommand(mManualDriveCommand);
     }
 
-A new instance of ManualDrive is created, which also creates the drive command.
-To use the drive command in RobotContainer, the default command of the Swerve object 
-is set to the manual drive object. When Teleop starts, the ManualDrive command will 
-be automatically executed.
+創建了一個新的 ManualDrive instance，它也創建了 drive command。為了要在 
+RobotContainer 中使用 drive command，Swerve object 的原始設置為手動驅動。
+當 Teleop 啟動時，ManualDrive 命令將自動執行。
