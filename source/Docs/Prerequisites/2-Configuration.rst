@@ -2,14 +2,13 @@
 Swerve Configuration
 ####################
 
-Before you can start programming the swerve, you need to collect constants 
-specific to your robot that will be used to configure the swerve. 
-All constants will be recorded in ``Constants.java``. 
+開始寫 swerve 的程式前，你需要搜集你的機器人特定的 constant，而它會被用
+來配置你的 swerve。所有的 constant 都會記錄在 ``Constants.java``. 
 
 Motor & Sensor IDs
 ******************
 
-Record the CAN IDs of the rotor and throttle motors. 
+請紀錄 rotor 和 throttle 馬達的 CAN IDs。
 
 .. code-block:: java
     :linenos:
@@ -26,7 +25,7 @@ Record the CAN IDs of the rotor and throttle motors.
     public static final int kLeftRearThrottleID = 0;
     public static final int kRightRearThrottleID = 0;
 
-Record the CAN or analog IDs of the rotor encoders and IMU (not applicable for navX).
+請紀錄 rotor encoders 和 IMU 的 CAN 或 analog IDs（若是用 navX 可以跳過這一步）。
 
 .. code-block:: java
     :linenos:
@@ -40,22 +39,21 @@ Record the CAN or analog IDs of the rotor encoders and IMU (not applicable for n
     // IMU ID
     public static final int kImuID = 0;
 
-Rotor Encoder Offsets
-*********************
+Rotor Encoder 偏移量
+********************
 
-In order for the angle of the swerve modules to be in sync, you must
-compensate for potential rotor encoder offsets. 
+為了讓 swerve modules 的角度可以同步，你需要補償 rotor encoder 可能的偏移量。
 
-First, rotate the modules so that all wheels are facing in the same direction. 
-Next, ensure that when positive power is applied to throttle motors, all 
-wheels spin in the forward direction. 
+首先，轉動 module ，讓所有的輪子都面對同一個方向。然後，確保 throttle 馬達
+有正面動力時，所有的輪子會轉同一個方向。
+
 
 .. figure:: ../Photos/UpsidedownSwerve.jpg
     :scale: 35%
 
-    `source <https://www.youtube.com/watch?v=wCakzMfRPKs&ab_channel=Orbit1690>`_
+    `來源 <https://www.youtube.com/watch?v=wCakzMfRPKs&ab_channel=Orbit1690>`_
 
-Record the rotor encoder values for each module in the ``Constants.java`` file.
+把每個 module 的 rotor encoder 數值記錄在 Constants.java 裡。
 
 .. code-block:: java
     :linenos:
@@ -67,16 +65,14 @@ Record the rotor encoder values for each module in the ``Constants.java`` file.
 
 .. note::
     
-    The rotor offset will be added to the rotor encoder value. This is why
-    the rotor offset is multiplied by -1. 
+    Rotor 的偏移量會被加到 rotor encoder value。這是 rotor 偏移量要乘於 -1 的原因。
 
-Rotor Motor & Encoder Inversion
-*******************************
+Rotor 馬達 & Encoder Inversion
+******************************
 
-The rotor motor and encoder may need to be inverted. When positive power is applied 
-to the rotor motor, the rotor encoder should increase in value. If this is not the
-case, you will need to invert the rotor motor or encoder in the ``Constants.java`` file
-by changing the boolean value of the motor/encoder to ``true``.
+Rotor 馬達和 encoder 可能需要倒置。當 rotor motor 有 正面動力時，rotor encoder 的
+數值應該要增加。如果不是這樣，你會需在 ``Constants.java`` 裡，把 馬達 / encoder 的 
+boolean value 改成 true。這樣就可以倒置 rotor 馬達或 encoder。
 
 .. code-block:: java
     :linenos:
@@ -91,14 +87,13 @@ Swerve Kinematics
     :alt: Width & length of swerve
     :scale: 50%
 
-Record the width and length of the robot (units in meters). Since 
-positive X is forward, and positive Y is left, the configuration should 
-look something like this. 
+紀錄機器人的長度與寬度（已米為單位）。因為正面 X 是往前，而正面 Y 是往
+左，configuration 應該要長得像這樣。
 
 .. code-block:: java
     :linenos:
 
-    // Swerve module order: front left, front right, rear left, rear right
+    // Swerve module 順序：左前，右前，左後，右後
     public static final SwerveDriveKinematics kSwerveKinematics = new SwerveDriveKinematics(
         new Translation2d(LENGTH/2, WIDTH/2), 
         new Translation2d(LENGTH/2, -WIDTH/2), 
@@ -106,13 +101,13 @@ look something like this.
         new Translation2d(-LENGTH/2, -WIDTH/2)
     );
 
-Extra Constants
-***************
+多餘的 Constants
+****************
 
-Max Speed/Acceleration
-----------------------
+最大速度 / 加速度
+----------------
 
-Record the maximum speed and acceleration of the robot (meters).
+請紀錄機器人最大的速度與加速度（米）。
 
 .. code-block:: java
     :linenos:
@@ -120,32 +115,30 @@ Record the maximum speed and acceleration of the robot (meters).
     public static final double kMaxVelocityMetersPerSecond = 0.0;
     public static final double kMaxAccelerationMetersPerSecond = 0.0;
 
-Wheel Diameter
---------------
+輪徑
+----
 
-Record the diameter of the swerve wheels (meters).
+請紀錄 swerve wheel 的直徑（米）。
 
 .. code-block:: java
     :linenos:
 
     public static final double kWheelDiameterMeters = 0.0;
 
-Throttle Gear Ratio
--------------------
+Throttle 齒輪比率
+-----------------
 
-Record the throttle gear ratio (number of turns it takes the motor to rotate 
-the wheel one revolution).
+請紀錄 throttle 齒輪比率（馬達轉動輪子一圈所需的圈數）。
 
 .. code-block:: java
     :linenos:
 
     public static final double kThrottleGearRatio = 0.0; 
 
-Throttle Velocity Conversion Constant
--------------------------------------
+Throttle 速度轉換 Constant
+--------------------------
 
-Finally, with the constants above, you can calculate the conversion constant that will 
-be used to convert from throttle encoder velocity to linear velocity (meters/second).
+使用以上的 constant，你可以算出從 throttle encoder 速度轉換成線性速度（米/秒）所需要的轉換 constant。
 
 .. tabs::
 
@@ -165,9 +158,8 @@ be used to convert from throttle encoder velocity to linear velocity (meters/sec
 
         .. note::
 
-            The :math:`10` is used to convert from 100ms to 1s, since the Talon FX 
-            uses 100ms as the time unit for velocity. The :math:`\frac{1}{2048}` is 
-            used to convert from Falcon encoder ticks to rotations.
+            乘於 :math:`10` 是為了要從 100ms 轉換成 1s，因為 Talon FX 是使用 100ms 來
+            量速度的。 :math:`\frac{1}{2048}` 是用來把 Falcon encoder tick 轉換成圈數。
 
         .. code-block:: java
             :linenos:
