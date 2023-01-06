@@ -19,7 +19,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Contributors 
 
-
+See [here](https://github.com/TASRobotics/RaidZero-Outreach-Swerve-Docs#contributors).
 
 ## License
 
