@@ -2,13 +2,13 @@
 Swerve Class
 ############
 
-The swerve class combines 4 swerve modules to control the swerve as a whole. 
+Swerve Class 結合了 4 個 swerve module 來控制整個 swerve。
 
 .. note:: 
 
-    For API specific issues, please see the `WPILib API <https://www.youtube.com/watch?v=dQw4w9WgXcQ>`_
-    , `CTRE API <https://api.ctr-electronics.com/phoenix/release/java/>`_, and the `REV Robotics API 
-    <https://codedocs.revrobotics.com/java/com/revrobotics/package-summary.html>`_.
+    有關 API 的特定問題，請參閱 `WPILib API <https://www.youtube.com/watch?v=dQw4w9WgXcQ>`_
+    ， `CTRE API <https://api.ctr-electronics.com/phoenix/release/java/>`_，和 `REV Robotics API 
+    <https://codedocs.revrobotics.com/java/com/revrobotics/package-summary.html>`_。
 
 Constructor
 ***********
@@ -16,14 +16,14 @@ Constructor
 .. code-block:: java
     :linenos:
 
-    // Initialize IMU
+    // 初始化 IMU
     private final WPI_Pigeon2 mImu = new WPI_Pigeon2(SwerveConstants.kImuID);
 
     private final SwerveModule mLeftFrontModule, mRightFrontModule, mLeftRearModule, mRightRearModule;
     private SwerveDriveOdometry mOdometry;
 
     public Swerve() {
-        // Instantiate swerve modules - each representing unique module on the robot
+        // 實例化（instantiate）swerve module - 個代表機器上四個其一
         mLeftFrontModule = new SwerveModule(
             SwerveConstants.kLeftFrontThrottleID, 
             SwerveConstants.kLeftFrontRotorID, 
@@ -52,14 +52,14 @@ Constructor
             SwerveConstants.kRightRearRotorOffset
         );
 
-        // Instantiate odometry - used for tracking position
+        // 實例化（instantiate）測程法（odometry） - 用於追踪位置
         mOdometry = new SwerveDriveOdometry(SwerveConstants.kSwerveKinematics, mImu.getRotation2d());
     }
 
 Methods
 *******
 
-Updates odometry with current module state.
+使用當前 Swerve module 狀態更新測程法（odometry）。
 
 periodic
 ========
@@ -69,7 +69,7 @@ periodic
 
     @Override
     public void periodic() {
-        // Updates odometry with current module state
+        // 使用當前Swerve module狀態更新測程法（odometry）。
         mOdometry.update(
             mImu.getRotation2d(), 
             getModuleStates()[0], 
@@ -82,7 +82,7 @@ periodic
 drive
 =====
 
-Moves chassis in desired direction & rotation.
+移動底盤到想要的方向 / 地方與轉向。
 
 .. code-block:: java
     :linenos:
@@ -91,7 +91,7 @@ Moves chassis in desired direction & rotation.
         SwerveModuleState[] states = null;
         if(fieldOriented) {
             states = SwerveConstants.kSwerveKinematics.toSwerveModuleStates(
-                // IMU used for field oriented control
+                // IMU 用於 Field Oriented Control
                 ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, zSpeed, mImu.getRotation2d())
             );
         } else {
@@ -105,16 +105,16 @@ Moves chassis in desired direction & rotation.
 **Parameters:**
 """""""""""""""
 
-    1. ``xSpeed`` - percent power in the X direction
-    2. ``ySpeed`` - percent power in the Y direction
-    3. ``zSpeed`` - percent power for rotation
-    4. ``fieldOriented`` - configure robot movement style (field or robot oriented)
+    1. ``xSpeed`` - X 方向的功率百分比
+    2. ``ySpeed`` - Y 方向的功率百分比
+    3. ``zSpeed`` - 旋轉的功率百分比
+    4. ``fieldOriented`` - 設置機器運動方式（Field or Robot Oriented）
 
 
 getModuleStates
 ===============
 
-Outputs the current state of the 4 drive swerve modules.
+輸出 4 個 Swerve Module 的當前狀態 modules。
 
 .. code-block:: java
     :linenos:
@@ -132,18 +132,17 @@ Outputs the current state of the 4 drive swerve modules.
 **Return:**
 """""""""""
 
-    Return states of all modules in a SwerveModuleState array (Order: 
-    [leftFront, rightFront, leftRear, rightRear]).
+    返回 SwerveModuleState 數組中所有Swerve的狀態（順序：[左前、右前、左後、右後]）。
 
 setModuleStates
 ===============
 
-Sets the state of the 4 drive swerve modules.
+設置 4 個 Swerve module 的狀態。
 
 .. code-block:: java
     :linenos:
 
-    // Swerve module order: [leftFront, leftRear, rightFront, rightRear]
+    // Swerve module 順序：[左前、右前、左後、右後]
     public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, 1);
         mLeftFrontModule.setState(desiredStates[0]);
@@ -155,13 +154,13 @@ Sets the state of the 4 drive swerve modules.
 **Parameters:**
 """""""""""""""
 
-    1. ``desiredStates`` - Array of desired `SwerveModuleState <https://first.wpi.edu/wpilib/allwpilib/docs/release/java
-       /edu/wpi/first/math/kinematics/SwerveModuleState.html>`_
+    1. ``desiredStates`` - 理想 `SwerveModuleState <https://first.wpi.edu/wpilib/allwpilib/docs/release/java
+       /edu/wpi/first/math/kinematics/SwerveModuleState.html>`_ 數組。
 
 getPose
 =======
 
-Gets the current position of the robot.
+獲取機器人的當前位置。
 
 .. code-block:: java
     :linenos:
@@ -173,14 +172,14 @@ Gets the current position of the robot.
 **Return:**
 """""""""""
 
-    New `Pose2d <https://first.wpi.edu/wpilib/allwpilib/docs/release/java
-    /edu/wpi/first/math/geometry/Pose2d.html>`_ representing robot position on the field in meters.
+    新的 `Pose2d <https://first.wpi.edu/wpilib/allwpilib/docs/release/java
+    /edu/wpi/first/math/geometry/Pose2d.html>`_ 表示機器人在場地上的位置（以米為單位）。
 
 
 setPose
 =======
 
-Sets odometry position to a given x, y, position, and angle.
+將測程法（odometry）位置設置為給與的 x、y、位置和角度。
 
 .. code-block:: java
     :linenos:
@@ -192,5 +191,5 @@ Sets odometry position to a given x, y, position, and angle.
 **Parameters:**
 """""""""""""""
 
-    1. ``pose`` - A `Pose2d <https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/geometry/Pose2d.html>`_ 
-       object with the robot position and angle
+    1. ``pose`` - 具有機器人位置和角度的 `Pose2d <https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/geometry/Pose2d.html>`_ 
+       object。

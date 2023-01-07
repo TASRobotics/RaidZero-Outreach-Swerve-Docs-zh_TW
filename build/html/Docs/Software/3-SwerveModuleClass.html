@@ -99,233 +99,220 @@ speed.</p>
 <div class="section" id="constructor">
 <h2>Constructor<a class="headerlink" href="#constructor" title="本標題的永久連結"></a></h2>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Talon FX &amp; CANCoder</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">SPARK MAX &amp; CANCoder</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">SPARK MAX &amp; Analog Absolute Encoder</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// Initialize rotor &amp; throttle motors</span>
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Talon FX &amp; CANCoder</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">SPARK MAX &amp; CANCoder</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">SPARK MAX &amp; Analog Absolute Encoder</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// 初始化 rotor &amp; throttle 馬達</span>
 <span class="linenos"> 2</span><span class="kd">private</span> <span class="n">WPI_TalonFX</span> <span class="n">mRotor</span><span class="p">;</span>
 <span class="linenos"> 3</span><span class="kd">private</span> <span class="n">WPI_TalonFX</span> <span class="n">mThrottle</span><span class="p">;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="c1">// Initialize rotor encoder</span>
+<span class="linenos"> 5</span><span class="c1">// 初始化 rotor encoder</span>
 <span class="linenos"> 6</span><span class="kd">private</span> <span class="n">WPI_CANCoder</span> <span class="n">mRotorEncoder</span><span class="p">;</span>
 <span class="linenos"> 7</span>
-<span class="linenos"> 8</span><span class="c1">// Initialize rotor PID controller</span>
+<span class="linenos"> 8</span><span class="c1">// 初始化 rotor PID controller</span>
 <span class="linenos"> 9</span><span class="kd">private</span> <span class="n">PIDController</span> <span class="n">mRotorPID</span><span class="p">;</span>
 <span class="linenos">10</span>
 <span class="linenos">11</span><span class="cm">/**</span>
-<span class="linenos">12</span><span class="cm"> * Construct new SwerveModule</span>
+<span class="linenos">12</span><span class="cm"> * 構建新的 SwerveModule</span>
 <span class="linenos">13</span><span class="cm"> *</span>
-<span class="linenos">14</span><span class="cm"> * @param throttleID CAN ID of throttle motor</span>
-<span class="linenos">15</span><span class="cm"> * @param rotorID CAN ID of rotor motor</span>
+<span class="linenos">14</span><span class="cm"> * @param throttleID CAN ID of throttle 馬達</span>
+<span class="linenos">15</span><span class="cm"> * @param rotorID CAN ID of rotor 馬達</span>
 <span class="linenos">16</span><span class="cm"> * @param rotorEncoderID CAN ID of rotor encoder</span>
-<span class="linenos">17</span><span class="cm"> * @param rotorOffsetAngleDeg rotor encoder offset</span>
+<span class="linenos">17</span><span class="cm"> * @param rotorOffsetAngleDeg rotor encoder 偏移量</span>
 <span class="linenos">18</span><span class="cm"> */</span>
 <span class="linenos">19</span><span class="kd">public</span> <span class="nf">SwerveModule</span><span class="p">(</span><span class="kt">int</span> <span class="n">throttleID</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rotorID</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rotorEncoderID</span><span class="p">,</span> <span class="kt">double</span> <span class="n">rotorOffsetAngleDeg</span><span class="p">)</span>
 <span class="linenos">20</span><span class="p">{</span>
-<span class="linenos">21</span>    <span class="c1">// Instantiate throttle motor</span>
+<span class="linenos">21</span>    <span class="c1">// 實例化 throttle 馬達</span>
 <span class="linenos">22</span>    <span class="n">mThrottle</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WPI_TalonFX</span><span class="p">(</span><span class="n">throttleID</span><span class="p">);</span>
 <span class="linenos">23</span>
-<span class="linenos">24</span>    <span class="c1">// Instantiate rotor motor</span>
+<span class="linenos">24</span>    <span class="c1">// 實例化 rotor 馬達</span>
 <span class="linenos">25</span>    <span class="n">mRotor</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WPI_TalonFX</span><span class="p">(</span><span class="n">rotorID</span><span class="p">);</span>
 <span class="linenos">26</span>
-<span class="linenos">27</span>    <span class="c1">// Instantiate rotor absolute encoder</span>
+<span class="linenos">27</span>    <span class="c1">// 實例化 rotor absolute encoder</span>
 <span class="linenos">28</span>    <span class="n">mRotorEncoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WPI_CANCoder</span><span class="p">(</span><span class="n">rotorEncoderID</span><span class="p">);</span>
 <span class="linenos">29</span>
-<span class="linenos">30</span>    <span class="c1">// Reset all configuration</span>
-<span class="linenos">31</span>    <span class="c1">// (technically optional, but good practice in case there are old</span>
-<span class="linenos">32</span>    <span class="c1">// configurations that can mess with the code)</span>
-<span class="linenos">33</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">configFactoryDefault</span><span class="p">();</span>
-<span class="linenos">34</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">configFactoryDefault</span><span class="p">();</span>
-<span class="linenos">35</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configFactoryDefault</span><span class="p">();</span>
-<span class="linenos">36</span>
-<span class="linenos">37</span>    <span class="c1">// Configures rotor motor according to previously defined constants</span>
-<span class="linenos">38</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setInverted</span><span class="p">(</span><span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotorMotorInversion</span><span class="p">);</span>
-<span class="linenos">39</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">configVoltageCompSaturation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
-<span class="linenos">40</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-<span class="linenos">41</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setNeutralMode</span><span class="p">(</span><span class="n">NeutralMode</span><span class="p">.</span><span class="na">Brake</span><span class="p">);</span>
-<span class="linenos">42</span>
-<span class="linenos">43</span>    <span class="c1">// Configures rotor encoder according to previously defined constants</span>
-<span class="linenos">44</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configAbsoluteSensorRange</span><span class="p">(</span><span class="n">AbsoluteSensorRange</span><span class="p">.</span><span class="na">Signed_PlusMinus180</span><span class="p">);</span>
-<span class="linenos">45</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configMagnetOffset</span><span class="p">(</span><span class="n">rotorOffsetAngleDeg</span><span class="p">);</span>
-<span class="linenos">46</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configSensorDirection</span><span class="p">(</span><span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotorEncoderDirection</span><span class="p">);</span>
-<span class="linenos">47</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configSensorInitializationStrategy</span><span class="p">(</span>
-<span class="linenos">48</span>        <span class="n">SensorInitializationStrategy</span><span class="p">.</span><span class="na">BootToAbsolutePosition</span>
-<span class="linenos">49</span>    <span class="p">);</span>
-<span class="linenos">50</span>
-<span class="linenos">51</span>    <span class="c1">// Configures rotor PID controller according to previously defined constants</span>
-<span class="linenos">52</span>    <span class="n">mRotorPID</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PIDController</span><span class="p">(</span>
-<span class="linenos">53</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kP</span><span class="p">,</span>
-<span class="linenos">54</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kI</span><span class="p">,</span>
-<span class="linenos">55</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kD</span>
-<span class="linenos">56</span>    <span class="p">);</span>
-<span class="linenos">57</span>
-<span class="linenos">58</span>    <span class="c1">// Continuous input considers the min &amp; max to be the same point and</span>
-<span class="linenos">59</span>    <span class="c1">// automatically calculates the shortest route to the setpoint</span>
-<span class="linenos">60</span>    <span class="n">mRotorPID</span><span class="p">.</span><span class="na">enableContinuousInput</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">);</span>
-<span class="linenos">61</span>
-<span class="linenos">62</span>    <span class="c1">// Configures throttle motor according to previously defined constants</span>
-<span class="linenos">63</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">configSelectedFeedbackSensor</span><span class="p">(</span><span class="n">FeedbackDevice</span><span class="p">.</span><span class="na">IntegratedSensor</span><span class="p">);</span>
-<span class="linenos">64</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">configVoltageCompSaturation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
-<span class="linenos">65</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-<span class="linenos">66</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">setNeutralMode</span><span class="p">(</span><span class="n">NeutralMode</span><span class="p">.</span><span class="na">Brake</span><span class="p">);</span>
-<span class="linenos">67</span><span class="p">}</span>
+<span class="linenos">30</span>    <span class="c1">// 重置所有配置（保險起見以免有舊的配置）</span>
+<span class="linenos">31</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">configFactoryDefault</span><span class="p">();</span>
+<span class="linenos">32</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">configFactoryDefault</span><span class="p">();</span>
+<span class="linenos">33</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configFactoryDefault</span><span class="p">();</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span>    <span class="c1">// 根據之前的常數配置 rotor 馬達</span>
+<span class="linenos">36</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setInverted</span><span class="p">(</span><span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotorMotorInversion</span><span class="p">);</span>
+<span class="linenos">37</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">configVoltageCompSaturation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
+<span class="linenos">38</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="linenos">39</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setNeutralMode</span><span class="p">(</span><span class="n">NeutralMode</span><span class="p">.</span><span class="na">Brake</span><span class="p">);</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span>    <span class="c1">// 根據之前的常數配置轉向 rotor encoder</span>
+<span class="linenos">42</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configAbsoluteSensorRange</span><span class="p">(</span><span class="n">AbsoluteSensorRange</span><span class="p">.</span><span class="na">Signed_PlusMinus180</span><span class="p">);</span>
+<span class="linenos">43</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configMagnetOffset</span><span class="p">(</span><span class="n">rotorOffsetAngleDeg</span><span class="p">);</span>
+<span class="linenos">44</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configSensorDirection</span><span class="p">(</span><span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotorEncoderDirection</span><span class="p">);</span>
+<span class="linenos">45</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configSensorInitializationStrategy</span><span class="p">(</span>
+<span class="linenos">46</span>        <span class="n">SensorInitializationStrategy</span><span class="p">.</span><span class="na">BootToAbsolutePosition</span>
+<span class="linenos">47</span>    <span class="p">);</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span>    <span class="c1">// 根據之前的常數配置 rotor 馬達的PID控制器</span>
+<span class="linenos">50</span>    <span class="n">mRotorPID</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PIDController</span><span class="p">(</span>
+<span class="linenos">51</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kP</span><span class="p">,</span>
+<span class="linenos">52</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kI</span><span class="p">,</span>
+<span class="linenos">53</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kD</span>
+<span class="linenos">54</span>    <span class="p">);</span>
+<span class="linenos">55</span>
+<span class="linenos">56</span>    <span class="c1">// ContinuousInput 認為 min 和 max 是同一點並且自動計算到設定點的最短路線</span>
+<span class="linenos">57</span>    <span class="n">mRotorPID</span><span class="p">.</span><span class="na">enableContinuousInput</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">);</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span>    <span class="c1">// 根據之前的常數配置 throttle 馬達</span>
+<span class="linenos">60</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">configSelectedFeedbackSensor</span><span class="p">(</span><span class="n">FeedbackDevice</span><span class="p">.</span><span class="na">IntegratedSensor</span><span class="p">);</span>
+<span class="linenos">61</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">configVoltageCompSaturation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
+<span class="linenos">62</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="linenos">63</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">setNeutralMode</span><span class="p">(</span><span class="n">NeutralMode</span><span class="p">.</span><span class="na">Brake</span><span class="p">);</span>
+<span class="linenos">64</span><span class="p">}</span>
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// Initialize rotor &amp; throttle motors</span>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// 初始化 rotor &amp; throttle 馬達</span>
 <span class="linenos"> 2</span><span class="kd">private</span> <span class="n">CANSparkMax</span> <span class="n">mRotor</span><span class="p">;</span>
 <span class="linenos"> 3</span><span class="kd">private</span> <span class="n">CANSparkMax</span> <span class="n">mThrottle</span><span class="p">;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="c1">// Initialize throttle encoder</span>
+<span class="linenos"> 5</span><span class="c1">// 初始化 throttle encoder</span>
 <span class="linenos"> 6</span><span class="kd">private</span> <span class="n">RelativeEncoder</span> <span class="n">mThrottleEncoder</span><span class="p">;</span>
 <span class="linenos"> 7</span>
-<span class="linenos"> 8</span><span class="c1">// Initialize rotor encoder</span>
+<span class="linenos"> 8</span><span class="c1">// 初始化 rotor encoder</span>
 <span class="linenos"> 9</span><span class="kd">private</span> <span class="n">WPI_CANCoder</span> <span class="n">mRotorEncoder</span><span class="p">;</span>
 <span class="linenos">10</span>
-<span class="linenos">11</span><span class="c1">// Initialize rotor PID controller</span>
+<span class="linenos">11</span><span class="c1">// 初始化 rotor PID controller</span>
 <span class="linenos">12</span><span class="kd">private</span> <span class="n">PIDController</span> <span class="n">mRotorPID</span><span class="p">;</span>
 <span class="linenos">13</span>
 <span class="linenos">14</span><span class="cm">/**</span>
-<span class="linenos">15</span><span class="cm"> * Construct new SwerveModule</span>
+<span class="linenos">15</span><span class="cm"> * 構建新的 SwerveModule</span>
 <span class="linenos">16</span><span class="cm"> *</span>
-<span class="linenos">17</span><span class="cm"> * @param throttleID CAN ID of throttle motor</span>
-<span class="linenos">18</span><span class="cm"> * @param rotorID CAN ID of rotor motor</span>
+<span class="linenos">17</span><span class="cm"> * @param throttleID CAN ID of throttle 馬達</span>
+<span class="linenos">18</span><span class="cm"> * @param rotorID CAN ID of rotor 馬達</span>
 <span class="linenos">19</span><span class="cm"> * @param rotorEncoderID CAN ID of rotor encoder</span>
-<span class="linenos">20</span><span class="cm"> * @param rotorOffsetAngleDeg rotor encoder offset</span>
+<span class="linenos">20</span><span class="cm"> * @param rotorOffsetAngleDeg rotor encoder 偏移量</span>
 <span class="linenos">21</span><span class="cm"> */</span>
 <span class="linenos">22</span><span class="kd">public</span> <span class="nf">SwerveModule</span><span class="p">(</span><span class="kt">int</span> <span class="n">throttleID</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rotorID</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rotorEncoderID</span><span class="p">,</span> <span class="kt">double</span> <span class="n">rotorOffsetAngleDeg</span><span class="p">)</span>
 <span class="linenos">23</span><span class="p">{</span>
-<span class="linenos">24</span>    <span class="c1">// Instantiate throttle motor &amp; respective encoder</span>
+<span class="linenos">24</span>    <span class="c1">// 實例化 throttle 馬達 &amp; encoder</span>
 <span class="linenos">25</span>    <span class="n">mThrottle</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CANSparkMax</span><span class="p">(</span><span class="n">throttleID</span><span class="p">,</span> <span class="n">MotorType</span><span class="p">.</span><span class="na">kBrushless</span><span class="p">);</span>
 <span class="linenos">26</span>    <span class="n">mThrottleEncoder</span> <span class="o">=</span> <span class="n">mThrottle</span><span class="p">.</span><span class="na">getEncoder</span><span class="p">();</span>
 <span class="linenos">27</span>
-<span class="linenos">28</span>    <span class="c1">// Instantiate rotor motor</span>
+<span class="linenos">28</span>    <span class="c1">// 實例化 rotor 馬達</span>
 <span class="linenos">29</span>    <span class="n">mRotor</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CANSparkMax</span><span class="p">(</span><span class="n">rotorID</span><span class="p">,</span> <span class="n">MotorType</span><span class="p">.</span><span class="na">kBrushless</span><span class="p">);</span>
 <span class="linenos">30</span>
-<span class="linenos">31</span>    <span class="c1">// Instantiate rotor absolute encoder</span>
+<span class="linenos">31</span>    <span class="c1">// 實例化 rotor absolute encoder</span>
 <span class="linenos">32</span>    <span class="n">mRotorEncoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WPI_CANCoder</span><span class="p">(</span><span class="n">rotorEncoderID</span><span class="p">);</span>
 <span class="linenos">33</span>
-<span class="linenos">34</span>    <span class="c1">// Reset all configuration</span>
-<span class="linenos">35</span>    <span class="c1">// (technically optional, but good practice in case there are old</span>
-<span class="linenos">36</span>    <span class="c1">// configurations that can mess with the code)</span>
-<span class="linenos">37</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">restoreFactoryDefaults</span><span class="p">();</span>
-<span class="linenos">38</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">restoreFactoryDefaults</span><span class="p">();</span>
-<span class="linenos">39</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configFactoryDefault</span><span class="p">();</span>
-<span class="linenos">40</span>
-<span class="linenos">41</span>    <span class="c1">// Configures rotor motor according to previously defined constants</span>
-<span class="linenos">42</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setInverted</span><span class="p">(</span><span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotorMotorInversion</span><span class="p">);</span>
-<span class="linenos">43</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
-<span class="linenos">44</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setIdleMode</span><span class="p">(</span><span class="n">IdleMode</span><span class="p">.</span><span class="na">kBrake</span><span class="p">);</span>
-<span class="linenos">45</span>
-<span class="linenos">46</span>    <span class="c1">// Configures rotor encoder according to previously defined constants</span>
-<span class="linenos">47</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configAbsoluteSensorRange</span><span class="p">(</span><span class="n">AbsoluteSensorRange</span><span class="p">.</span><span class="na">Signed_PlusMinus180</span><span class="p">);</span>
-<span class="linenos">48</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configMagnetOffset</span><span class="p">(</span><span class="n">rotorOffsetAngleDeg</span><span class="p">);</span>
-<span class="linenos">49</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configSensorDirection</span><span class="p">(</span><span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotorEncoderDirection</span><span class="p">);</span>
-<span class="linenos">50</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configSensorInitializationStrategy</span><span class="p">(</span>
-<span class="linenos">51</span>        <span class="n">SensorInitializationStrategy</span><span class="p">.</span><span class="na">BootToAbsolutePosition</span>
-<span class="linenos">52</span>    <span class="p">);</span>
-<span class="linenos">53</span>
-<span class="linenos">54</span>    <span class="c1">// Configures rotor PID controller according to previously defined constants</span>
-<span class="linenos">55</span>    <span class="n">mRotorPID</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PIDController</span><span class="p">(</span>
-<span class="linenos">56</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kP</span><span class="p">,</span>
-<span class="linenos">57</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kI</span><span class="p">,</span>
-<span class="linenos">58</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kD</span>
-<span class="linenos">59</span>    <span class="p">);</span>
-<span class="linenos">60</span>
-<span class="linenos">61</span>    <span class="c1">// Continuous input considers the min &amp; max to be the same point and</span>
-<span class="linenos">62</span>    <span class="c1">// automatically calculates the shortest route to the setpoint</span>
-<span class="linenos">63</span>    <span class="n">mRotorPID</span><span class="p">.</span><span class="na">enableContinuousInput</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">);</span>
-<span class="linenos">64</span>
-<span class="linenos">65</span>    <span class="c1">// Configures throttle motor according to previously defined constants</span>
-<span class="linenos">66</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
-<span class="linenos">67</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">setIdleMode</span><span class="p">(</span><span class="n">IdleMode</span><span class="p">.</span><span class="na">kBrake</span><span class="p">);</span>
-<span class="linenos">68</span>
-<span class="linenos">69</span>    <span class="c1">// Sets conversion factor to throttle encoder so that it reads</span>
-<span class="linenos">70</span>    <span class="c1">// velocity in meters per second instead of RPM</span>
-<span class="linenos">71</span>    <span class="n">mThrottleEncoder</span><span class="p">.</span><span class="na">setVelocityConversionFactor</span><span class="p">(</span>
-<span class="linenos">72</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kThrottleVelocityConversionFactor</span>
-<span class="linenos">73</span>    <span class="p">);</span>
-<span class="linenos">74</span><span class="p">}</span>
+<span class="linenos">34</span>    <span class="c1">// 重置所有配置（保險起見以免有舊的配置）</span>
+<span class="linenos">35</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">restoreFactoryDefaults</span><span class="p">();</span>
+<span class="linenos">36</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">restoreFactoryDefaults</span><span class="p">();</span>
+<span class="linenos">37</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configFactoryDefault</span><span class="p">();</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span>    <span class="c1">// 根據之前的常數配置 rotor 馬達</span>
+<span class="linenos">40</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setInverted</span><span class="p">(</span><span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotorMotorInversion</span><span class="p">);</span>
+<span class="linenos">41</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
+<span class="linenos">42</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setIdleMode</span><span class="p">(</span><span class="n">IdleMode</span><span class="p">.</span><span class="na">kBrake</span><span class="p">);</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span>    <span class="c1">// 根據之前的常數配置轉向 rotor encoder</span>
+<span class="linenos">45</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configAbsoluteSensorRange</span><span class="p">(</span><span class="n">AbsoluteSensorRange</span><span class="p">.</span><span class="na">Signed_PlusMinus180</span><span class="p">);</span>
+<span class="linenos">46</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configMagnetOffset</span><span class="p">(</span><span class="n">rotorOffsetAngleDeg</span><span class="p">);</span>
+<span class="linenos">47</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configSensorDirection</span><span class="p">(</span><span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotorEncoderDirection</span><span class="p">);</span>
+<span class="linenos">48</span>    <span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">configSensorInitializationStrategy</span><span class="p">(</span>
+<span class="linenos">49</span>        <span class="n">SensorInitializationStrategy</span><span class="p">.</span><span class="na">BootToAbsolutePosition</span>
+<span class="linenos">50</span>    <span class="p">);</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span>    <span class="c1">// 根據之前的常數配置 rotor 馬達的PID控制器</span>
+<span class="linenos">53</span>    <span class="n">mRotorPID</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PIDController</span><span class="p">(</span>
+<span class="linenos">54</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kP</span><span class="p">,</span>
+<span class="linenos">55</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kI</span><span class="p">,</span>
+<span class="linenos">56</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kD</span>
+<span class="linenos">57</span>    <span class="p">);</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span>    <span class="c1">// ContinuousInput 認為 min 和 max 是同一點並且自動計算到設定點的最短路線</span>
+<span class="linenos">60</span>    <span class="n">mRotorPID</span><span class="p">.</span><span class="na">enableContinuousInput</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">);</span>
+<span class="linenos">61</span>
+<span class="linenos">62</span>    <span class="c1">// 根據之前的常數配置 throttle 馬達</span>
+<span class="linenos">63</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
+<span class="linenos">64</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">setIdleMode</span><span class="p">(</span><span class="n">IdleMode</span><span class="p">.</span><span class="na">kBrake</span><span class="p">);</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span>    <span class="c1">// 給與 throttle encoder 轉換係數以便它以米每秒而不是 RPM 為單位讀取速度</span>
+<span class="linenos">67</span>    <span class="n">mThrottleEncoder</span><span class="p">.</span><span class="na">setVelocityConversionFactor</span><span class="p">(</span>
+<span class="linenos">68</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kThrottleVelocityConversionFactor</span>
+<span class="linenos">69</span>    <span class="p">);</span>
+<span class="linenos">70</span><span class="p">}</span>
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// Initialize rotor &amp; throttle motors</span>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// 初始化 rotor &amp; throttle 馬達</span>
 <span class="linenos"> 2</span><span class="kd">private</span> <span class="n">CANSparkMax</span> <span class="n">mRotor</span><span class="p">;</span>
 <span class="linenos"> 3</span><span class="kd">private</span> <span class="n">CANSparkMax</span> <span class="n">mThrottle</span><span class="p">;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="c1">// Initialize throttle encoder</span>
+<span class="linenos"> 5</span><span class="c1">// 初始化 throttle encoder</span>
 <span class="linenos"> 6</span><span class="kd">private</span> <span class="n">RelativeEncoder</span> <span class="n">mThrottleEncoder</span><span class="p">;</span>
 <span class="linenos"> 7</span>
-<span class="linenos"> 8</span><span class="c1">// Initialize rotor encoder</span>
+<span class="linenos"> 8</span><span class="c1">// 初始化 rotor encoder</span>
 <span class="linenos"> 9</span><span class="kd">private</span> <span class="n">AnalogPotentiometer</span> <span class="n">mRotorEncoder</span><span class="p">;</span>
 <span class="linenos">10</span>
-<span class="linenos">11</span><span class="c1">// Initialize rotor PID controller</span>
+<span class="linenos">11</span><span class="c1">// 初始化 rotor PID controller</span>
 <span class="linenos">12</span><span class="kd">private</span> <span class="n">PIDController</span> <span class="n">mRotorPID</span><span class="p">;</span>
 <span class="linenos">13</span>
 <span class="linenos">14</span><span class="cm">/**</span>
-<span class="linenos">15</span><span class="cm"> * Construct new SwerveModule</span>
+<span class="linenos">15</span><span class="cm"> * 構建新的 SwerveModule</span>
 <span class="linenos">16</span><span class="cm"> *</span>
-<span class="linenos">17</span><span class="cm"> * @param throttleID CAN ID of throttle motor</span>
-<span class="linenos">18</span><span class="cm"> * @param rotorID CAN ID of rotor motor</span>
+<span class="linenos">17</span><span class="cm"> * @param throttleID CAN ID of throttle 馬達</span>
+<span class="linenos">18</span><span class="cm"> * @param rotorID CAN ID of rotor 馬達</span>
 <span class="linenos">19</span><span class="cm"> * @param rotorEncoderID analog ID of rotor encoder</span>
-<span class="linenos">20</span><span class="cm"> * @param rotorOffsetAngleDeg rotor encoder offset</span>
+<span class="linenos">20</span><span class="cm"> * @param rotorOffsetAngleDeg rotor encoder 偏移量</span>
 <span class="linenos">21</span><span class="cm"> */</span>
 <span class="linenos">22</span><span class="kd">public</span> <span class="nf">SwerveModule</span><span class="p">(</span><span class="kt">int</span> <span class="n">throttleID</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rotorID</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rotorEncoderID</span><span class="p">,</span> <span class="kt">double</span> <span class="n">rotorOffsetAngleDeg</span><span class="p">)</span>
 <span class="linenos">23</span><span class="p">{</span>
-<span class="linenos">24</span>    <span class="c1">// Instantiate throttle motor &amp; respective encoder</span>
+<span class="linenos">24</span>    <span class="c1">// 實例化 throttle 馬達 &amp; encoder</span>
 <span class="linenos">25</span>    <span class="n">mThrottle</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CANSparkMax</span><span class="p">(</span><span class="n">throttleID</span><span class="p">,</span> <span class="n">MotorType</span><span class="p">.</span><span class="na">kBrushless</span><span class="p">);</span>
 <span class="linenos">26</span>    <span class="n">mThrottleEncoder</span> <span class="o">=</span> <span class="n">mThrottle</span><span class="p">.</span><span class="na">getEncoder</span><span class="p">();</span>
 <span class="linenos">27</span>
-<span class="linenos">28</span>    <span class="c1">// Instantiate rotor motor</span>
+<span class="linenos">28</span>    <span class="c1">// 實例化 rotor 馬達</span>
 <span class="linenos">29</span>    <span class="n">mRotor</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CANSparkMax</span><span class="p">(</span><span class="n">rotorID</span><span class="p">,</span> <span class="n">MotorType</span><span class="p">.</span><span class="na">kBrushless</span><span class="p">);</span>
 <span class="linenos">30</span>
-<span class="linenos">31</span>    <span class="c1">// Instantiate rotor absolute encoder</span>
-<span class="linenos">32</span>    <span class="c1">// - Full range = 360 because that should be the max possible value the</span>
-<span class="linenos">33</span>    <span class="c1">//   encoder should return</span>
-<span class="linenos">34</span>    <span class="n">mRotorEncoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AnalogPotentiometer</span><span class="p">(</span><span class="n">rotorEncoderID</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="n">rotorOffsetAngleDeg</span><span class="p">);</span>
-<span class="linenos">35</span>
-<span class="linenos">36</span>    <span class="c1">// Reset all configuration</span>
-<span class="linenos">37</span>    <span class="c1">// (technically optional, but good practice in case there are old</span>
-<span class="linenos">38</span>    <span class="c1">// configurations that can mess with the code)</span>
-<span class="linenos">39</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">restoreFactoryDefaults</span><span class="p">();</span>
-<span class="linenos">40</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">restoreFactoryDefaults</span><span class="p">();</span>
-<span class="linenos">41</span>
-<span class="linenos">42</span>    <span class="c1">// Configures rotor motor according to previously defined constants</span>
-<span class="linenos">43</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setInverted</span><span class="p">(</span><span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotorMotorInversion</span><span class="p">);</span>
-<span class="linenos">44</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
-<span class="linenos">45</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setIdleMode</span><span class="p">(</span><span class="n">IdleMode</span><span class="p">.</span><span class="na">kBrake</span><span class="p">);</span>
-<span class="linenos">46</span>
-<span class="linenos">47</span>    <span class="c1">// Configures rotor PID controller according to previously defined constants</span>
-<span class="linenos">48</span>    <span class="n">mRotorPID</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PIDController</span><span class="p">(</span>
-<span class="linenos">49</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kP</span><span class="p">,</span>
-<span class="linenos">50</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kI</span><span class="p">,</span>
-<span class="linenos">51</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kD</span>
-<span class="linenos">52</span>    <span class="p">);</span>
+<span class="linenos">31</span>    <span class="c1">// 實例化 rotor absolute encoder</span>
+<span class="linenos">32</span>    <span class="c1">// - 完整範圍 = 360，因為這是編碼器能返回的最大值</span>
+<span class="linenos">33</span>    <span class="n">mRotorEncoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AnalogPotentiometer</span><span class="p">(</span><span class="n">rotorEncoderID</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="n">rotorOffsetAngleDeg</span><span class="p">);</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span>    <span class="c1">// 重置所有配置（保險起見以免有舊的配置）</span>
+<span class="linenos">36</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">restoreFactoryDefaults</span><span class="p">();</span>
+<span class="linenos">37</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">restoreFactoryDefaults</span><span class="p">();</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span>    <span class="c1">// 根據之前的常數配置 rotor 馬達</span>
+<span class="linenos">40</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setInverted</span><span class="p">(</span><span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotorMotorInversion</span><span class="p">);</span>
+<span class="linenos">41</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
+<span class="linenos">42</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">setIdleMode</span><span class="p">(</span><span class="n">IdleMode</span><span class="p">.</span><span class="na">kBrake</span><span class="p">);</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span>    <span class="c1">// 根據之前的常數配置 rotor 馬達的PID控制器</span>
+<span class="linenos">45</span>    <span class="n">mRotorPID</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PIDController</span><span class="p">(</span>
+<span class="linenos">46</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kP</span><span class="p">,</span>
+<span class="linenos">47</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kI</span><span class="p">,</span>
+<span class="linenos">48</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kRotor_kD</span>
+<span class="linenos">49</span>    <span class="p">);</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span>    <span class="c1">// ContinuousInput 認為 min 和 max 是同一點並且自動計算到設定點的最短路線</span>
+<span class="linenos">52</span>    <span class="n">mRotorPID</span><span class="p">.</span><span class="na">enableContinuousInput</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">);</span>
 <span class="linenos">53</span>
-<span class="linenos">54</span>    <span class="c1">// Continuous input considers the min &amp; max to be the same point and</span>
-<span class="linenos">55</span>    <span class="c1">// automatically calculates the shortest route to the setpoint</span>
-<span class="linenos">56</span>    <span class="n">mRotorPID</span><span class="p">.</span><span class="na">enableContinuousInput</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">);</span>
+<span class="linenos">54</span>    <span class="c1">// 根據之前的常數配置 throttle 馬達</span>
+<span class="linenos">55</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
+<span class="linenos">56</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">setIdleMode</span><span class="p">(</span><span class="n">IdleMode</span><span class="p">.</span><span class="na">kBrake</span><span class="p">);</span>
 <span class="linenos">57</span>
-<span class="linenos">58</span>    <span class="c1">// Configures throttle motor according to previously defined constants</span>
-<span class="linenos">59</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">enableVoltageCompensation</span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kVoltageCompensation</span><span class="p">);</span>
-<span class="linenos">60</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">setIdleMode</span><span class="p">(</span><span class="n">IdleMode</span><span class="p">.</span><span class="na">kBrake</span><span class="p">);</span>
-<span class="linenos">61</span>
-<span class="linenos">62</span>    <span class="c1">// Sets conversion factor to throttle encoder so that it reads</span>
-<span class="linenos">63</span>    <span class="c1">// velocity in meters per second instead of RPM</span>
-<span class="linenos">64</span>    <span class="n">mThrottleEncoder</span><span class="p">.</span><span class="na">setVelocityConversionFactor</span><span class="p">(</span>
-<span class="linenos">65</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kThrottleVelocityConversionFactor</span>
-<span class="linenos">66</span>    <span class="p">);</span>
-<span class="linenos">67</span><span class="p">}</span>
+<span class="linenos">58</span>    <span class="c1">// 給與 throttle encoder 轉換係數以便它以米每秒而不是 RPM 為單位讀取速度</span>
+<span class="linenos">59</span>    <span class="n">mThrottleEncoder</span><span class="p">.</span><span class="na">setVelocityConversionFactor</span><span class="p">(</span>
+<span class="linenos">60</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kThrottleVelocityConversionFactor</span>
+<span class="linenos">61</span>    <span class="p">);</span>
+<span class="linenos">62</span><span class="p">}</span>
 </pre></div>
 </div>
 </div></div>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
-<p>When using brushless motors, it is highly recommended to have liberal current limits
-to prevent damage to the motors. Checkout the <a class="reference external" href="https://api.ctr-electronics.com/phoenix/release/java/com/ctre/phoenix/motorcontrol/can/TalonFX.html#configSupplyCurrentLimit(com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration)">CTRE</a> and
-<a class="reference external" href="https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax#setSmartCurrentLimit(int)">REV</a> documentation for more information regarding current limits.</p>
+<p>使用無刷馬達時，強烈建議設置寬鬆的電流限制 以防止損壞馬達。查看 <a class="reference external" href="https://api.ctr-electronics.com/phoenix/release/java/com/ctre/phoenix/motorcontrol/can/TalonFX.html#configSupplyCurrentLimit(com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration)">CTRE</a> 和
+<a class="reference external" href="https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax#setSmartCurrentLimit(int)">REV</a> 文檔以獲取有關電流限制的更多信息。</p>
 </div>
 </div>
 <div class="section" id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="本標題的永久連結"></a></h2>
 <div class="section" id="getstate">
 <h3>getState<a class="headerlink" href="#getstate" title="本標題的永久連結"></a></h3>
-<p>Outputs the current state of the swerve module.</p>
+<p>輸出 swerve module 的當前狀態。</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">Talon FX</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">SPARK MAX</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">public</span> <span class="n">SwerveModuleState</span> <span class="nf">getState</span><span class="p">()</span> <span class="p">{</span>
 <span class="linenos">2</span>    <span class="kt">double</span> <span class="n">throttleVelocity</span> <span class="o">=</span>
@@ -350,35 +337,32 @@ to prevent damage to the motors. Checkout the <a class="reference external" href
 <div class="section" id="return">
 <h4><strong>Return:</strong><a class="headerlink" href="#return" title="本標題的永久連結"></a></h4>
 <blockquote>
-<div><p>New <a class="reference external" href="https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/kinematics/SwerveModuleState.html">SwerveModuleState</a> representing the current
-throttle velocity and rotor angle.</p>
+<div><p>新的 <a class="reference external" href="https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/kinematics/SwerveModuleState.html">SwerveModuleState</a> 代表著目前的前進速度和面相角度。</p>
 </div></blockquote>
 </div>
 </div>
 <div class="section" id="setstate">
 <h3>setState<a class="headerlink" href="#setstate" title="本標題的永久連結"></a></h3>
-<p>Sets the state of the swerve module.</p>
+<p>設置 swerve module 的狀態。</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setState</span><span class="p">(</span><span class="n">SwerveModuleState</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
-<span class="linenos"> 2</span>    <span class="c1">// Optimize the desired state so that the rotor doesn&#39;t have to spin more than</span>
-<span class="linenos"> 3</span>    <span class="c1">// 90 degrees to get to the desired angle</span>
-<span class="linenos"> 4</span>    <span class="n">SwerveModuleState</span> <span class="n">optimizedState</span> <span class="o">=</span> <span class="n">SwerveModuleState</span><span class="p">.</span><span class="na">optimize</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">getState</span><span class="p">().</span><span class="na">angle</span><span class="p">);</span>
-<span class="linenos"> 5</span>
-<span class="linenos"> 6</span>    <span class="c1">// Calculate rotor output using rotor PID controller by comparing the current</span>
-<span class="linenos"> 7</span>    <span class="c1">// angle with the desired angle</span>
-<span class="linenos"> 8</span>    <span class="kt">double</span> <span class="n">rotorOutput</span> <span class="o">=</span> <span class="n">mRotorPID</span><span class="p">.</span><span class="na">calculate</span><span class="p">(</span>
-<span class="linenos"> 9</span>        <span class="n">getState</span><span class="p">().</span><span class="na">angle</span><span class="p">.</span><span class="na">getDegrees</span><span class="p">(),</span>
-<span class="linenos">10</span>        <span class="n">optimizedState</span><span class="p">.</span><span class="na">angle</span><span class="p">.</span><span class="na">getDegrees</span><span class="p">()</span>
-<span class="linenos">11</span>    <span class="p">);</span>
-<span class="linenos">12</span>
-<span class="linenos">13</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">rotorOutput</span><span class="p">);</span>
-<span class="linenos">14</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">optimizedState</span><span class="p">.</span><span class="na">speedMetersPerSecond</span><span class="p">);</span>
-<span class="linenos">15</span><span class="p">}</span>
+<span class="linenos"> 2</span>    <span class="c1">// 優化狀態，使轉向馬達不必旋轉超過 90 度來獲得目標的角度</span>
+<span class="linenos"> 3</span>    <span class="n">SwerveModuleState</span> <span class="n">optimizedState</span> <span class="o">=</span> <span class="n">SwerveModuleState</span><span class="p">.</span><span class="na">optimize</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">getState</span><span class="p">().</span><span class="na">angle</span><span class="p">);</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="c1">// 通過比較目前角度與目標角度來用 PID 控制器計算轉向馬達所需的輸出</span>
+<span class="linenos"> 6</span>    <span class="kt">double</span> <span class="n">rotorOutput</span> <span class="o">=</span> <span class="n">mRotorPID</span><span class="p">.</span><span class="na">calculate</span><span class="p">(</span>
+<span class="linenos"> 7</span>        <span class="n">getState</span><span class="p">().</span><span class="na">angle</span><span class="p">.</span><span class="na">getDegrees</span><span class="p">(),</span>
+<span class="linenos"> 8</span>        <span class="n">optimizedState</span><span class="p">.</span><span class="na">angle</span><span class="p">.</span><span class="na">getDegrees</span><span class="p">()</span>
+<span class="linenos"> 9</span>    <span class="p">);</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="n">mRotor</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">rotorOutput</span><span class="p">);</span>
+<span class="linenos">12</span>    <span class="n">mThrottle</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">optimizedState</span><span class="p">.</span><span class="na">speedMetersPerSecond</span><span class="p">);</span>
+<span class="linenos">13</span><span class="p">}</span>
 </pre></div>
 </div>
 <div class="section" id="parameters">
 <h4>Parameters:<a class="headerlink" href="#parameters" title="本標題的永久連結"></a></h4>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code> - desired <a class="reference external" href="https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/kinematics/SwerveModuleState.html">SwerveModuleState</a> (angle &amp; speed) of SwerveModule</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code> - 理想的 <a class="reference external" href="https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/kinematics/SwerveModuleState.html">SwerveModuleState</a> (angle &amp; speed) of SwerveModule</p></li>
 </ol>
 </div>
 </div>

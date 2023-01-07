@@ -26,49 +26,47 @@ Constructor
         .. code-block:: java
             :linenos:
 
-            // Initialize rotor & throttle motors 
+            // 初始化 rotor & throttle 馬達
             private WPI_TalonFX mRotor;
             private WPI_TalonFX mThrottle;
 
-            // Initialize rotor encoder
+            // 初始化 rotor encoder
             private WPI_CANCoder mRotorEncoder; 
 
-            // Initialize rotor PID controller
+            // 初始化 rotor PID controller
             private PIDController mRotorPID; 
 
             /**
-             * Construct new SwerveModule
+             * 構建新的 SwerveModule
              * 
-             * @param throttleID CAN ID of throttle motor
-             * @param rotorID CAN ID of rotor motor
+             * @param throttleID CAN ID of throttle 馬達
+             * @param rotorID CAN ID of rotor 馬達
              * @param rotorEncoderID CAN ID of rotor encoder
-             * @param rotorOffsetAngleDeg rotor encoder offset
+             * @param rotorOffsetAngleDeg rotor encoder 偏移量
              */
             public SwerveModule(int throttleID, int rotorID, int rotorEncoderID, double rotorOffsetAngleDeg) 
             {
-                // Instantiate throttle motor
+                // 實例化 throttle 馬達
                 mThrottle = new WPI_TalonFX(throttleID);
 
-                // Instantiate rotor motor 
+                // 實例化 rotor 馬達 
                 mRotor = new WPI_TalonFX(rotorID);
 
-                // Instantiate rotor absolute encoder
+                // 實例化 rotor absolute encoder
                 mRotorEncoder = new WPI_CANCoder(rotorEncoderID);
 
-                // Reset all configuration 
-                // (technically optional, but good practice in case there are old 
-                // configurations that can mess with the code)
+                // 重置所有配置（保險起見以免有舊的配置）
                 mThrottle.configFactoryDefault();
                 mRotor.configFactoryDefault();
                 mRotorEncoder.configFactoryDefault();
 
-                // Configures rotor motor according to previously defined constants
+                // 根據之前的常數配置 rotor 馬達
                 mRotor.setInverted(SwerveConstants.kRotorMotorInversion); 
                 mRotor.configVoltageCompSaturation(Constants.kVoltageCompensation);
                 mRotor.enableVoltageCompensation(true);
                 mRotor.setNeutralMode(NeutralMode.Brake);
 
-                // Configures rotor encoder according to previously defined constants
+                // 根據之前的常數配置轉向 rotor encoder
                 mRotorEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
                 mRotorEncoder.configMagnetOffset(rotorOffsetAngleDeg);
                 mRotorEncoder.configSensorDirection(SwerveConstants.kRotorEncoderDirection); 
@@ -76,18 +74,17 @@ Constructor
                     SensorInitializationStrategy.BootToAbsolutePosition
                 );
 
-                // Configures rotor PID controller according to previously defined constants
+                // 根據之前的常數配置 rotor 馬達的PID控制器
                 mRotorPID = new PIDController(
                     SwerveConstants.kRotor_kP, 
                     SwerveConstants.kRotor_kI, 
                     SwerveConstants.kRotor_kD
                 );
 
-                // Continuous input considers the min & max to be the same point and 
-                // automatically calculates the shortest route to the setpoint
+                // ContinuousInput 認為 min 和 max 是同一點並且自動計算到設定點的最短路線
                 mRotorPID.enableContinuousInput(-180, 180);
 
-                // Configures throttle motor according to previously defined constants
+                // 根據之前的常數配置 throttle 馬達
                 mThrottle.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
                 mThrottle.configVoltageCompSaturation(Constants.kVoltageCompensation);
                 mThrottle.enableVoltageCompensation(true);
@@ -99,52 +96,50 @@ Constructor
         .. code-block:: java
             :linenos:
 
-            // Initialize rotor & throttle motors 
+            // 初始化 rotor & throttle 馬達
             private CANSparkMax mRotor;
             private CANSparkMax mThrottle;
 
-            // Initialize throttle encoder
+            // 初始化 throttle encoder 
             private RelativeEncoder mThrottleEncoder;
 
-            // Initialize rotor encoder
+            // 初始化 rotor encoder
             private WPI_CANCoder mRotorEncoder; 
 
-            // Initialize rotor PID controller
+            // 初始化 rotor PID controller
             private PIDController mRotorPID; 
 
             /**
-             * Construct new SwerveModule
+             * 構建新的 SwerveModule
              * 
-             * @param throttleID CAN ID of throttle motor
-             * @param rotorID CAN ID of rotor motor
+             * @param throttleID CAN ID of throttle 馬達
+             * @param rotorID CAN ID of rotor 馬達
              * @param rotorEncoderID CAN ID of rotor encoder
-             * @param rotorOffsetAngleDeg rotor encoder offset
+             * @param rotorOffsetAngleDeg rotor encoder 偏移量
              */
             public SwerveModule(int throttleID, int rotorID, int rotorEncoderID, double rotorOffsetAngleDeg) 
             {
-                // Instantiate throttle motor & respective encoder
+                // 實例化 throttle 馬達 & encoder
                 mThrottle = new CANSparkMax(throttleID, MotorType.kBrushless);
                 mThrottleEncoder = mThrottle.getEncoder();
 
-                // Instantiate rotor motor 
+                // 實例化 rotor 馬達
                 mRotor = new CANSparkMax(rotorID, MotorType.kBrushless);
 
-                // Instantiate rotor absolute encoder
+                // 實例化 rotor absolute encoder
                 mRotorEncoder = new WPI_CANCoder(rotorEncoderID);
 
-                // Reset all configuration 
-                // (technically optional, but good practice in case there are old 
-                // configurations that can mess with the code)
+                // 重置所有配置（保險起見以免有舊的配置）
                 mThrottle.restoreFactoryDefaults();
                 mRotor.restoreFactoryDefaults();
                 mRotorEncoder.configFactoryDefault();
 
-                // Configures rotor motor according to previously defined constants
+                // 根據之前的常數配置 rotor 馬達
                 mRotor.setInverted(SwerveConstants.kRotorMotorInversion); 
                 mRotor.enableVoltageCompensation(Constants.kVoltageCompensation);
                 mRotor.setIdleMode(IdleMode.kBrake);
 
-                // Configures rotor encoder according to previously defined constants
+                // 根據之前的常數配置轉向 rotor encoder
                 mRotorEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
                 mRotorEncoder.configMagnetOffset(rotorOffsetAngleDeg);
                 mRotorEncoder.configSensorDirection(SwerveConstants.kRotorEncoderDirection); 
@@ -152,23 +147,21 @@ Constructor
                     SensorInitializationStrategy.BootToAbsolutePosition
                 );
 
-                // Configures rotor PID controller according to previously defined constants
+                // 根據之前的常數配置 rotor 馬達的PID控制器
                 mRotorPID = new PIDController(
                     SwerveConstants.kRotor_kP, 
                     SwerveConstants.kRotor_kI, 
                     SwerveConstants.kRotor_kD
                 );
 
-                // Continuous input considers the min & max to be the same point and 
-                // automatically calculates the shortest route to the setpoint
+                // ContinuousInput 認為 min 和 max 是同一點並且自動計算到設定點的最短路線
                 mRotorPID.enableContinuousInput(-180, 180);
 
-                // Configures throttle motor according to previously defined constants
+                // 根據之前的常數配置 throttle 馬達
                 mThrottle.enableVoltageCompensation(Constants.kVoltageCompensation);
                 mThrottle.setIdleMode(IdleMode.kBrake);
 
-                // Sets conversion factor to throttle encoder so that it reads 
-                // velocity in meters per second instead of RPM
+                // 給與 throttle encoder 轉換係數以便它以米每秒而不是 RPM 為單位讀取速度
                 mThrottleEncoder.setVelocityConversionFactor(
                     SwerveConstants.kThrottleVelocityConversionFactor
                 );
@@ -179,69 +172,64 @@ Constructor
         .. code-block:: java
             :linenos:
 
-            // Initialize rotor & throttle motors 
+            // 初始化 rotor & throttle 馬達
             private CANSparkMax mRotor;
             private CANSparkMax mThrottle;
 
-            // Initialize throttle encoder
+            // 初始化 throttle encoder
             private RelativeEncoder mThrottleEncoder;
 
-            // Initialize rotor encoder
+            // 初始化 rotor encoder
             private AnalogPotentiometer mRotorEncoder;
 
-            // Initialize rotor PID controller
+            // 初始化 rotor PID controller
             private PIDController mRotorPID; 
 
             /**
-             * Construct new SwerveModule
+             * 構建新的 SwerveModule
              * 
-             * @param throttleID CAN ID of throttle motor
-             * @param rotorID CAN ID of rotor motor
+             * @param throttleID CAN ID of throttle 馬達
+             * @param rotorID CAN ID of rotor 馬達
              * @param rotorEncoderID analog ID of rotor encoder
-             * @param rotorOffsetAngleDeg rotor encoder offset
+             * @param rotorOffsetAngleDeg rotor encoder 偏移量
              */
             public SwerveModule(int throttleID, int rotorID, int rotorEncoderID, double rotorOffsetAngleDeg) 
             {
-                // Instantiate throttle motor & respective encoder
+                // 實例化 throttle 馬達 & encoder
                 mThrottle = new CANSparkMax(throttleID, MotorType.kBrushless);
                 mThrottleEncoder = mThrottle.getEncoder();
 
-                // Instantiate rotor motor 
+                // 實例化 rotor 馬達
                 mRotor = new CANSparkMax(rotorID, MotorType.kBrushless);
 
-                // Instantiate rotor absolute encoder
-                // - Full range = 360 because that should be the max possible value the 
-                //   encoder should return
+                // 實例化 rotor absolute encoder
+                // - 完整範圍 = 360，因為這是編碼器能返回的最大值
                 mRotorEncoder = new AnalogPotentiometer(rotorEncoderID, 360, rotorOffsetAngleDeg);
 
-                // Reset all configuration 
-                // (technically optional, but good practice in case there are old 
-                // configurations that can mess with the code)
+                // 重置所有配置（保險起見以免有舊的配置）
                 mThrottle.restoreFactoryDefaults();
                 mRotor.restoreFactoryDefaults();
 
-                // Configures rotor motor according to previously defined constants
+                // 根據之前的常數配置 rotor 馬達
                 mRotor.setInverted(SwerveConstants.kRotorMotorInversion); 
                 mRotor.enableVoltageCompensation(Constants.kVoltageCompensation);
                 mRotor.setIdleMode(IdleMode.kBrake);
 
-                // Configures rotor PID controller according to previously defined constants
+                // 根據之前的常數配置 rotor 馬達的PID控制器
                 mRotorPID = new PIDController(
                     SwerveConstants.kRotor_kP, 
                     SwerveConstants.kRotor_kI, 
                     SwerveConstants.kRotor_kD
                 );
 
-                // Continuous input considers the min & max to be the same point and 
-                // automatically calculates the shortest route to the setpoint
+                // ContinuousInput 認為 min 和 max 是同一點並且自動計算到設定點的最短路線
                 mRotorPID.enableContinuousInput(-180, 180);
 
-                // Configures throttle motor according to previously defined constants
+                // 根據之前的常數配置 throttle 馬達
                 mThrottle.enableVoltageCompensation(Constants.kVoltageCompensation);
                 mThrottle.setIdleMode(IdleMode.kBrake);
 
-                // Sets conversion factor to throttle encoder so that it reads 
-                // velocity in meters per second instead of RPM
+                // 給與 throttle encoder 轉換係數以便它以米每秒而不是 RPM 為單位讀取速度
                 mThrottleEncoder.setVelocityConversionFactor(
                     SwerveConstants.kThrottleVelocityConversionFactor
                 );
@@ -249,12 +237,12 @@ Constructor
 
 .. warning:: 
     
-    When using brushless motors, it is highly recommended to have liberal current limits
-    to prevent damage to the motors. Checkout the `CTRE <https://api.ctr-electronics.com
+    使用無刷馬達時，強烈建議設置寬鬆的電流限制 以防止損壞馬達。查看 `CTRE <https://
+    api.ctr-electronics.com
     /phoenix/release/java/com/ctre/phoenix/motorcontrol/can/TalonFX.html#configSupplyCu
-    rrentLimit(com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration)>`_ and 
+    rrentLimit(com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration)>`_ 和 
     `REV <https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax#
-    setSmartCurrentLimit(int)>`_ documentation for more information regarding current limits. 
+    setSmartCurrentLimit(int)>`_ 文檔以獲取有關電流限制的更多信息。
 
 Methods
 *******
@@ -262,7 +250,7 @@ Methods
 getState
 --------
 
-Outputs the current state of the swerve module.
+輸出 swerve module 的當前狀態。
 
 .. tabs::
     
@@ -296,25 +284,22 @@ Outputs the current state of the swerve module.
 **Return:**
 """""""""""
 
-    New `SwerveModuleState <https://first.wpi.edu/wpilib/allwpilib/docs/release/java
-    /edu/wpi/first/math/kinematics/SwerveModuleState.html>`_ representing the current
-    throttle velocity and rotor angle. 
+    新的 `SwerveModuleState <https://first.wpi.edu/wpilib/allwpilib/docs/release/java
+    /edu/wpi/first/math/kinematics/SwerveModuleState.html>`_ 代表著目前的前進速度和面相角度。
 
 setState
 --------
 
-Sets the state of the swerve module.
+設置 swerve module 的狀態。
 
 .. code-block:: java
     :linenos:
 
     public void setState(SwerveModuleState state) {
-        // Optimize the desired state so that the rotor doesn't have to spin more than
-        // 90 degrees to get to the desired angle
+        // 優化狀態，使轉向馬達不必旋轉超過 90 度來獲得目標的角度
         SwerveModuleState optimizedState = SwerveModuleState.optimize(state, getState().angle);
 
-        // Calculate rotor output using rotor PID controller by comparing the current
-        // angle with the desired angle
+        // 通過比較目前角度與目標角度來用 PID 控制器計算轉向馬達所需的輸出
         double rotorOutput = mRotorPID.calculate(
             getState().angle.getDegrees(), 
             optimizedState.angle.getDegrees()
@@ -327,5 +312,5 @@ Sets the state of the swerve module.
 Parameters:
 """""""""""
 
-1. ``state`` - desired `SwerveModuleState <https://first.wpi.edu/wpilib/allwpilib/docs/release/java
+1. ``state`` - 理想的 `SwerveModuleState <https://first.wpi.edu/wpilib/allwpilib/docs/release/java
    /edu/wpi/first/math/kinematics/SwerveModuleState.html>`_ (angle & speed) of SwerveModule
