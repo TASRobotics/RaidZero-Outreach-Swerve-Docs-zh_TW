@@ -8,6 +8,10 @@
 
 歡迎來到 4253 FRC 隊的 Swerve Documentation！這個紀錄包含了所有你需要了解的資訊。
 
+.. note::
+    在我們的 `Github <https://github.com/TASRobotics/RaidZero-Swerve-Template>`_
+    上查看我們在這些文檔中使用的代碼！
+
 .. toctree::
    :titlesonly:
    :caption: Swerve：前置作業

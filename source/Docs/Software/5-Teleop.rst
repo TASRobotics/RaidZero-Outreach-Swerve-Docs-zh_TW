@@ -116,3 +116,7 @@ Drive command 需要再 RobotContainer 裡被叫到。
 創建了一個新的 ManualDrive instance，它也創建了 drive command。為了要在 
 RobotContainer 中使用 drive command，Swerve object 的原始設置為手動驅動。
 當 Teleop 啟動時，ManualDrive 命令將自動執行。
+
+.. note::
+    在我們的 `Github <https://github.com/TASRobotics/RaidZero-Swerve-Template>`_
+    上查看我們在這些文檔中使用的代碼！

@@ -193,3 +193,7 @@ setPose
 
     1. ``pose`` - 具有機器人位置和角度的 `Pose2d <https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/geometry/Pose2d.html>`_ 
        object。
+
+.. note::
+    在我們的 `Github <https://github.com/TASRobotics/RaidZero-Swerve-Template>`_
+    上查看我們在這些文檔中使用的代碼！
