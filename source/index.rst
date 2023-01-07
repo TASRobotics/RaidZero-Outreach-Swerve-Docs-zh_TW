@@ -31,7 +31,6 @@
    :caption: 其他話題
    
    Docs/FurtherTopics/7-Feedforward
-   Docs/Sample.rst
 
 .. image:: Docs/Photos/LogoBW.png
     :scale: 10%

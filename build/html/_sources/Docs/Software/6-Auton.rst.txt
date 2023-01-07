@@ -1,53 +1,50 @@
-##################
-Autonomous Pathing
-##################
+########
+自動路徑
+########
 
-There are many different ways to implement pathing. In this guide, we will
-use `PathPlanner <https://github.com/mjansen4857/pathplanner>`_ to generate
-and follow paths. 
+有許多不同的方法來生成路徑。在本指南中，我們將使用 `PathPlanner <https://
+github.com/mjansen4857/pathplanner>`_ 來生成和跟隨路徑。
 
-Installation
-************
+下載
+****
 
 .. note:: 
 
-    Offical documentation can be found `here <https://github.com/mjansen4857/pathplanner/wiki>`_.
+    可以在 `here <https://github.com/mjansen4857/pathplanner/wiki>`_ 找到官方文檔。
 
-To start, install PathPlannerLib using this link:
+首先，使用此鏈接安裝 PathPlannerLib ：
 
 .. code-block:: bash
 
     https://3015rangerrobotics.github.io/pathplannerlib/PathplannerLib.json
 
-Next, download PathPlanner from the `Microsoft <https://www.microsoft.com/en-us
+接下來，從 `Microsoft <https://www.microsoft.com/en-us
 /p/frc-pathplanner/9nqbkb5dw909?cid=storebadge&ocid=badge&rtc=1&activetab=pivo
-t:overviewtab>`_ or `Mac App <https://apps.apple.com/us/app/frc-pathplanner/id1593046876>`_
-Store.
+t:overviewtab>`_ 或 `Mac App <https://apps.apple.com/us/app/frc-pathplanner/id1593046876>`_
+下載 PathPlanner。
 
-Path Generation
-***************
+生成路徑
+********
 
-1. Open PathPlanner, click "Switch Project" in the menu, and select the root 
-   of your project. 
+1. 打開 PathPlanner，點擊葉面中的「切換項目（Switch Project）」，然後選擇有你的項目所有項目源的文建夾。
 
 .. image:: ../Photos/PathPlanner1.PNG
     :scale: 50%
 
-2. Go to "Settings" in the menu, and configure everything according to your robot. 
-   Make sure to also select "Holonomic Mode". 
+2. 去葉面中的「設置（settings）」，並根據您的機器人配置設定所有內容。確定也選擇「完整模式（Holonomic Mode）」。
 
 .. image:: ../Photos/PathPlanner2.PNG
     :scale: 50%
 
-3. Finally, draw the paths you want the robot to follow. 
+3. 最後，繪製您希望機器人跟隨的路徑。
 
-Path Following
-**************
+路徑跟隨
+********
 
-We will now extract the path made in PathPlanner and use it in our robot code.
+我們現在將提取在 PathPlanner 中創建的路徑並將其用於我們的機器人代碼。
 
-In ``RobotContainer.java``, create an instance of ``PathPlannerTrajectory`` by 
-extracting the path you made in PathPlanner. 
+在 ``RobotContainer.java`` 中，通過提取您在 PathPlanner 中創建的路徑來創
+建 ``PathPlannerTrajectory`` 的實例。
 
 .. code-block:: java
     :linenos:
@@ -58,27 +55,26 @@ extracting the path you made in PathPlanner.
         SwerveConstants.kMaxAccelerationMetersPerSecond
     );
 
-Next, create 3 different PID controllers that will be used to control robot
-heading and movement in the x and y directions.
+接著，創建 3 個不同的 PID 控制器，用於控制機器人的 X 和 Y 方向和面對方向。
 
 .. code-block:: java
     :linenos:
 
-    // PID controller for movement in the X direction
+    // X 方向的 PID 控制器
     private PIDController mXController = new PIDController(
         SwerveConstants.kPathingX_kP, 
         SwerveConstants.kPathingX_kI, 
         SwerveConstants.kPathingX_kD
     );
 
-    // PID controller for movement in the Y direction
+    // Y 方向的 PID 控制器
     private PIDController mYController = new PIDController(
         SwerveConstants.kPathingY_kP, 
         SwerveConstants.kPathingY_kI, 
         SwerveConstants.kPathingY_kD
     );
 
-    // PID controller for robot heading
+    // 面對方向的 PID 控制器
     private PIDController mThetaController = new PIDController(
         SwerveConstants.kPathingTheta_kP, 
         SwerveConstants.kPathingTheta_kI, 
@@ -87,13 +83,12 @@ heading and movement in the x and y directions.
 
 .. warning::
 
-    All constants used in the PID controllers must be tuned. X and Y controllers
-    usually have the same constants, but the theta controller usually has different
-    constants. Tune the X and Y controller constants by making the robot follow long
-    straight paths. Once the X and Y controllers are tuned, tune the theta controller
-    by making the robot follow a short path with a sharp turn.
+    PID 控制器中使用的所有常數都必須根據你的機器進行調整。 X 和 Y 控制器通常
+    具有相同的常數，但 面對方向（theta）控制器通常具有不同的常數。可以通過使
+    機器沿著一條長的直線路徑來調整 X 和 Y 控制器常數。調整 X 和 Y 控制器後，
+    通過使機器人沿著一條短並具有急轉彎的路徑來調整面對方向（theta）控制器。
 
-Finally, create a ``SwerveControllerCommand`` that will be used to follow the path.
+最後，創建一個將用於跟隨路徑的 ``SwerveControllerCommand`` 。
 
 .. code-block:: java
     :linenos:
@@ -109,20 +104,19 @@ Finally, create a ``SwerveControllerCommand`` that will be used to follow the pa
         mSwerve
     );
 
-Return the command in ``getAutonomousCommand()``.
+在 ``getAutonomousCommand()`` 中返回命令（return）。
 
 .. code-block:: java
     :linenos:
 
     @Override
     public Command getAutonomousCommand() {
-        // `andThen...` is used to stop the robot after the path is finished
+        // `andThen...` 用於在路徑完成後停止機器人
         return command.andThen(() -> mSwerve.drive(0, 0, 0, false));
     }
 
-This allows the robot to follow the path you made in PathPlanner in autonomous.
+這允許機器人自主跟隨您在 PathPlanner 中創建的路徑。
 
 .. note::
 
-    If the path following is inaccurate or violent, try changing some of the 
-    PID controller constants. 
+    如果跟隨的路徑不准確或不穩定，請嘗試更改 PID 控制器常數。
