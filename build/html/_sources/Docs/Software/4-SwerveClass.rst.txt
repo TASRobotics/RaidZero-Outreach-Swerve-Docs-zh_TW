@@ -53,7 +53,11 @@ Constructor
         );
 
         // 實例化（instantiate）測程法（odometry） - 用於追踪位置
-        mOdometry = new SwerveDriveOdometry(SwerveConstants.kSwerveKinematics, mImu.getRotation2d());
+        mOdometry = new SwerveDriveOdometry(
+            SwerveConstants.kSwerveKinematics, 
+            mImu.getRotation2d(), 
+            getModulePositions()
+        );
     }
 
 Methods
@@ -70,13 +74,7 @@ periodic
     @Override
     public void periodic() {
         // 使用當前Swerve module狀態更新測程法（odometry）。
-        mOdometry.update(
-            mImu.getRotation2d(), 
-            getModuleStates()[0], 
-            getModuleStates()[1],
-            getModuleStates()[2],
-            getModuleStates()[3]
-        );
+        mOdometry.update(mImu.getRotation2d(), getModulePositions());
     }
 
 drive
@@ -134,6 +132,29 @@ getModuleStates
 
     返回 SwerveModuleState 數組中所有Swerve的狀態（順序：[左前、右前、左後、右後]）。
 
+getModulePositions
+==================
+
+Outputs the current positions of the 4 drive swerve modules.
+
+.. code-block:: java
+    :linenos:
+
+    public SwerveModulePosition[] getModulePositions() {
+        return new SwerveModulePosition[] {
+            mLeftFrontModule.getPosition(), 
+            mRightFrontModule.getPosition(), 
+            mLeftRearModule.getPosition(), 
+            mRightRearModule.getPosition()
+        };
+    }
+
+
+**Return:**
+"""""""""""
+
+    返回 SwerveModulePosition 數組中所有Swerve的狀態（順序：[左前、右前、左後、右後]）。
+
 setModuleStates
 ===============
 
@@ -185,7 +206,7 @@ setPose
     :linenos:
 
     public void setPose(Pose2d pose) {
-        mOdometry.resetPosition(pose, mImu.getRotation2d());
+        mOdometry.resetPosition(mImu.getRotation2d(), getModulePositions(), pose);
     }
 
 **Parameters:**
@@ -193,3 +214,7 @@ setPose
 
     1. ``pose`` - 具有機器人位置和角度的 `Pose2d <https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/geometry/Pose2d.html>`_ 
        object。
+
+.. note::
+    在我們的 `Github <https://github.com/TASRobotics/RaidZero-Swerve-Template>`_
+    上查看我們在這些文檔中使用的代碼！

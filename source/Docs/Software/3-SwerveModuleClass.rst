@@ -165,6 +165,9 @@ Constructor
                 mThrottleEncoder.setVelocityConversionFactor(
                     SwerveConstants.kThrottleVelocityConversionFactor
                 );
+                mThrottleEncoder.setPositionConversionFactor(
+                    SwerveConstants.kThrottlePositionConversionFactor
+                );
             }
 
     .. tab:: SPARK MAX & Analog Absolute Encoder
@@ -233,6 +236,9 @@ Constructor
                 mThrottleEncoder.setVelocityConversionFactor(
                     SwerveConstants.kThrottleVelocityConversionFactor
                 );
+                mThrottleEncoder.setPositionConversionFactor(
+                    SwerveConstants.kThrottlePositionConversionFactor
+                );
             }
 
 .. warning:: 
@@ -286,6 +292,46 @@ getState
 
     新的 `SwerveModuleState <https://first.wpi.edu/wpilib/allwpilib/docs/release/java
     /edu/wpi/first/math/kinematics/SwerveModuleState.html>`_ 代表著目前的前進速度和面相角度。
+
+getPosition
+-----------
+
+Outputs the current position of the swerve module.
+
+.. tabs::
+    
+    .. tab:: Talon FX
+
+        .. code-block:: java
+            :linenos:
+
+            public SwerveModulePosition getPosition() {
+                double throttlePosition = mThrottle.getSelectedSensorPosition() * SwerveConstants.kThrottlePositionConversionFactor;
+
+                return new SwerveModulePosition(
+                    throttlePosition, 
+                    Rotation2d.fromDegrees(mRotorEncoder.getAbsolutePosition())
+                );
+            }
+
+    .. tab:: SPARK MAX
+
+        .. code-block:: java
+            :linenos:
+
+            public SwerveModulePosition getPosition() {
+                return new SwerveModulePosition(
+                    mThrottleEncoder.getPosition(), 
+                    Rotation2d.fromDegrees(mRotorEncoder.get())
+                );
+            }
+
+**Return:**
+"""""""""""
+
+    New `SwerveModulePosition <https://first.wpi.edu/wpilib/allwpilib/docs/release/java
+    /edu/wpi/first/math/kinematics/SwerveModulePosition.html>`_ representing the current
+    throttle position and rotor angle. 
 
 setState
 --------

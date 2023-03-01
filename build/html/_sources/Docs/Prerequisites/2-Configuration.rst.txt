@@ -135,10 +135,43 @@ Throttle 齒輪比率
 
     public static final double kThrottleGearRatio = 0.0; 
 
-Throttle 速度轉換 Constant
---------------------------
+Throttle 轉換 Constant
+-----------------------
 
 使用以上的 constant，你可以算出從 throttle encoder 速度轉換成線性速度（米/秒）所需要的轉換 constant。
+
+Position Constant
+=================
+
+.. tabs::
+
+    .. tab:: Spark Max (Neo)
+
+        :math:`conversion = \frac{1}{gear ratio} \times {wheel diameter} \times \pi`
+
+        .. code-block:: java
+            :linenos:
+
+            public static final double kThrottleVelocityConversionFactor = 
+                1/kThrottleGearRatio*kWheelDiameterMeters*Math.PI;
+
+    .. tab:: Talon FX (Falcon 500)
+
+        :math:`conversion = \frac{1}{gear ratio} \times \frac{1}{2048} \times {wheel diameter} \times \pi`
+
+        .. note::
+
+            The :math:`\frac{1}{2048}` is 
+            used to convert from Falcon encoder ticks to rotations.
+
+        .. code-block:: java
+            :linenos:
+
+            public static final double kThrottleVelocityConversionFactor = 
+                1/kThrottleGearRatio/2048*kWheelDiameterMeters*Math.PI;
+
+Velocity Constant
+=================
 
 .. tabs::
 

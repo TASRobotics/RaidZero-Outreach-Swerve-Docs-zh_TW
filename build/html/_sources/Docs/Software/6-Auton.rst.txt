@@ -120,3 +120,7 @@ t:overviewtab>`_ 或 `Mac App <https://apps.apple.com/us/app/frc-pathplanner/id1
 .. note::
 
     如果跟隨的路徑不准確或不穩定，請嘗試更改 PID 控制器常數。
+
+.. note::
+    在我們的 `Github <https://github.com/TASRobotics/RaidZero-Swerve-Template>`_
+    上查看我們在這些文檔中使用的代碼！

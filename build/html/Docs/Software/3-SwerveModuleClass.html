@@ -234,7 +234,10 @@ speed.</p>
 <span class="linenos">67</span>    <span class="n">mThrottleEncoder</span><span class="p">.</span><span class="na">setVelocityConversionFactor</span><span class="p">(</span>
 <span class="linenos">68</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kThrottleVelocityConversionFactor</span>
 <span class="linenos">69</span>    <span class="p">);</span>
-<span class="linenos">70</span><span class="p">}</span>
+<span class="linenos">70</span>    <span class="n">mThrottleEncoder</span><span class="p">.</span><span class="na">setPositionConversionFactor</span><span class="p">(</span>
+<span class="linenos">71</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kThrottlePositionConversionFactor</span>
+<span class="linenos">72</span>    <span class="p">);</span>
+<span class="linenos">73</span><span class="p">}</span>
 </pre></div>
 </div>
 </div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// 初始化 rotor &amp; throttle 馬達</span>
@@ -298,7 +301,10 @@ speed.</p>
 <span class="linenos">59</span>    <span class="n">mThrottleEncoder</span><span class="p">.</span><span class="na">setVelocityConversionFactor</span><span class="p">(</span>
 <span class="linenos">60</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kThrottleVelocityConversionFactor</span>
 <span class="linenos">61</span>    <span class="p">);</span>
-<span class="linenos">62</span><span class="p">}</span>
+<span class="linenos">62</span>    <span class="n">mThrottleEncoder</span><span class="p">.</span><span class="na">setPositionConversionFactor</span><span class="p">(</span>
+<span class="linenos">63</span>        <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kThrottlePositionConversionFactor</span>
+<span class="linenos">64</span>    <span class="p">);</span>
+<span class="linenos">65</span><span class="p">}</span>
 </pre></div>
 </div>
 </div></div>
@@ -341,6 +347,37 @@ speed.</p>
 </div></blockquote>
 </div>
 </div>
+<div class="section" id="getposition">
+<h3>getPosition<a class="headerlink" href="#getposition" title="本標題的永久連結"></a></h3>
+<p>Outputs the current position of the swerve module.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">Talon FX</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">SPARK MAX</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">public</span> <span class="n">SwerveModulePosition</span> <span class="nf">getPosition</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="kt">double</span> <span class="n">throttlePosition</span> <span class="o">=</span> <span class="n">mThrottle</span><span class="p">.</span><span class="na">getSelectedSensorPosition</span><span class="p">()</span> <span class="o">*</span> <span class="n">SwerveConstants</span><span class="p">.</span><span class="na">kThrottlePositionConversionFactor</span><span class="p">;</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span>    <span class="k">return</span> <span class="k">new</span> <span class="n">SwerveModulePosition</span><span class="p">(</span>
+<span class="linenos">5</span>        <span class="n">throttlePosition</span><span class="p">,</span>
+<span class="linenos">6</span>        <span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">getAbsolutePosition</span><span class="p">())</span>
+<span class="linenos">7</span>    <span class="p">);</span>
+<span class="linenos">8</span><span class="p">}</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">public</span> <span class="n">SwerveModulePosition</span> <span class="nf">getPosition</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="k">new</span> <span class="n">SwerveModulePosition</span><span class="p">(</span>
+<span class="linenos">3</span>        <span class="n">mThrottleEncoder</span><span class="p">.</span><span class="na">getPosition</span><span class="p">(),</span>
+<span class="linenos">4</span>        <span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="n">mRotorEncoder</span><span class="p">.</span><span class="na">get</span><span class="p">())</span>
+<span class="linenos">5</span>    <span class="p">);</span>
+<span class="linenos">6</span><span class="p">}</span>
+</pre></div>
+</div>
+</div></div>
+<div class="section" id="id1">
+<h4><strong>Return:</strong><a class="headerlink" href="#id1" title="本標題的永久連結"></a></h4>
+<blockquote>
+<div><p>New <a class="reference external" href="https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/kinematics/SwerveModulePosition.html">SwerveModulePosition</a> representing the current
+throttle position and rotor angle.</p>
+</div></blockquote>
+</div>
+</div>
 <div class="section" id="setstate">
 <h3>setState<a class="headerlink" href="#setstate" title="本標題的永久連結"></a></h3>
 <p>設置 swerve module 的狀態。</p>
@@ -364,6 +401,11 @@ speed.</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">state</span></code> - 理想的 <a class="reference external" href="https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/kinematics/SwerveModuleState.html">SwerveModuleState</a> (angle &amp; speed) of SwerveModule</p></li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">備註</p>
+<p>在我們的 <a class="reference external" href="https://github.com/TASRobotics/RaidZero-Swerve-Template">Github</a>
+上查看我們在這些文檔中使用的代碼！</p>
+</div>
 </div>
 </div>
 </div>

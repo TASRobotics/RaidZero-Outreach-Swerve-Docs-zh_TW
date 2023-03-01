@@ -188,15 +188,37 @@ boolean value 改成 true。這樣就可以倒置 rotor 馬達或 encoder。</p>
 </div>
 </div>
 <div class="section" id="throttle-constant">
-<h3>Throttle 速度轉換 Constant<a class="headerlink" href="#throttle-constant" title="本標題的永久連結"></a></h3>
+<h3>Throttle 轉換 Constant<a class="headerlink" href="#throttle-constant" title="本標題的永久連結"></a></h3>
 <p>使用以上的 constant，你可以算出從 throttle encoder 速度轉換成線性速度（米/秒）所需要的轉換 constant。</p>
+<div class="section" id="position-constant">
+<h4>Position Constant<a class="headerlink" href="#position-constant" title="本標題的永久連結"></a></h4>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Spark Max (Neo)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Talon FX (Falcon 500)</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p><span class="math notranslate nohighlight">\(conversion = \frac{1}{gear ratio} \times \frac{1}{60} \times {wheel diameter} \times \pi\)</span></p>
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Spark Max (Neo)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Talon FX (Falcon 500)</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p><span class="math notranslate nohighlight">\(conversion = \frac{1}{gear ratio} \times {wheel diameter} \times \pi\)</span></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">kThrottleVelocityConversionFactor</span> <span class="o">=</span>
+<span class="linenos">2</span>    <span class="mi">1</span><span class="o">/</span><span class="n">kThrottleGearRatio</span><span class="o">*</span><span class="n">kWheelDiameterMeters</span><span class="o">*</span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="p">;</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p><span class="math notranslate nohighlight">\(conversion = \frac{1}{gear ratio} \times \frac{1}{2048} \times {wheel diameter} \times \pi\)</span></p>
+<div class="admonition note">
+<p class="admonition-title">備註</p>
+<p>The <span class="math notranslate nohighlight">\(\frac{1}{2048}\)</span> is
+used to convert from Falcon encoder ticks to rotations.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">kThrottleVelocityConversionFactor</span> <span class="o">=</span>
+<span class="linenos">2</span>    <span class="mi">1</span><span class="o">/</span><span class="n">kThrottleGearRatio</span><span class="o">/</span><span class="mi">2048</span><span class="o">*</span><span class="n">kWheelDiameterMeters</span><span class="o">*</span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></div>
+</div>
+<div class="section" id="velocity-constant">
+<h4>Velocity Constant<a class="headerlink" href="#velocity-constant" title="本標題的永久連結"></a></h4>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">Spark Max (Neo)</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Talon FX (Falcon 500)</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p><span class="math notranslate nohighlight">\(conversion = \frac{1}{gear ratio} \times \frac{1}{60} \times {wheel diameter} \times \pi\)</span></p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">kThrottleVelocityConversionFactor</span> <span class="o">=</span>
 <span class="linenos">2</span>    <span class="mi">1</span><span class="o">/</span><span class="n">kThrottleGearRatio</span><span class="o">/</span><span class="mi">60</span><span class="o">*</span><span class="n">kWheelDiameterMeters</span><span class="o">*</span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="p">;</span>
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p><span class="math notranslate nohighlight">\(conversion = \frac{1}{gear ratio} \times \frac{1}{2048} \times {wheel diameter} \times \pi \times 10\)</span></p>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p><span class="math notranslate nohighlight">\(conversion = \frac{1}{gear ratio} \times \frac{1}{2048} \times {wheel diameter} \times \pi \times 10\)</span></p>
 <div class="admonition note">
 <p class="admonition-title">備註</p>
 <p>乘於 <span class="math notranslate nohighlight">\(10\)</span> 是為了要從 100ms 轉換成 1s，因為 Talon FX 是使用 100ms 來
@@ -207,6 +229,7 @@ boolean value 改成 true。這樣就可以倒置 rotor 馬達或 encoder。</p>
 </pre></div>
 </div>
 </div></div>
+</div>
 </div>
 </div>
 </div>
